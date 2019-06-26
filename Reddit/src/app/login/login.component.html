@@ -1,9 +1,33 @@
 <form action="POST" class="formo" [formGroup]="form">
-    <label for="un">UserName : </label>
-    <input type="text" name="un" id="un" placeholder="Your Username" [(ngModel)]="username" formControlName="username" >
-    <!-- <h4 *ngIf=>"Username is required"</h4> -->
-    <label for="pw">Password : </label>
-    <input type="password" name="pw" id="pw" placeholder="Your Password" [(ngModel)]="password" formControlName="password" >
-    <!-- <h4 *ngIf=>"Password is required"</h4> -->
-    <button type="submit" [disabled]="!form.valid" >Log In</button> <!-- (click)="submitData()"  -->
+  <label for="username">UserName : </label>
+  <input
+    type="text"
+    id="username"
+    name="username"
+    placeholder="Your Username"
+    formControlName="username"
+    #username="ngModel"
+  />
+  <div
+    class="unError"
+    *ngIf="username.errors && (username.pristine || username.touched)"
+  >
+    <h4 [hidden]="username.errors.required">"Username is required"</h4>
+  </div>
+  <label for="password">Password : </label>
+  <input
+    type="password"
+    id="password"
+    name="password"
+    placeholder="Your Password"
+    formControlName="username"
+    #password="ngModel"
+  />
+  <!-- <div
+    class="pwError"
+    *ngIf="password.errors && (password.dirty || password.touched)"
+  >
+    <h4 [hidden]="password.errors.required">"Password is required"</h4>
+  </div> -->
+  <button type="submit" (click)="submitData()" [disabled]="!form.valid">Log In</button>
 </form>

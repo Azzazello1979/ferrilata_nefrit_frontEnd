@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators,} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,19 +7,25 @@ import { FormGroup, FormBuilder, Validators,} from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  username: string;
+  password: string;
   form: FormGroup;
-  username:string;
-  password:string;
+
   constructor(private formBuilder: FormBuilder) { }
 
-  submitData(){
-    
+  submitData() {  
+    this.username = this.form.get('UN').value;
+    this.password = this.form.get('PW').value;
+    // sendback
+    // succes:this.form.get('first').setValue('some value');
+    // this.form.get('first').setValue('some value');
+    // err(showerr)
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required],
+      UN: [null, Validators.required],
+      PW: [null, Validators.required],
     });
   }
 
