@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Posts } from '../../posts.model';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
