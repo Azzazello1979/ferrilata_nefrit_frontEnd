@@ -1,14 +1,7 @@
-<form action="POST" class="formo" [formGroup]="form">
-  <!-- (ngSubmit)="giveData()" -->
+<form action="POST" class="formo" > 
   <label for="user">UN</label>
-  <input type="text" name="user" formControlName="username" />
-  <div
-    *ngIf="form.controls.['username'].invalid && (form.controls['username'].dirty || form.controls['username'].touched)">
-    <div *ngIf="angForm.controls['name'].errors.required">
-      Username is required.
-    </div>
-  </div>
+  <input type="text" name="user">
   <label for="pass">PW</label>
-  <input type="text" name="pass" />
+  <input type="text" name="pass">
   <button type="submit"></button>
 </form>
