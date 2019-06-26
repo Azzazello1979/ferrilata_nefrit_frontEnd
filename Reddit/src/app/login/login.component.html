@@ -1,7 +1,30 @@
-<form action="POST" class="formo" > 
-  <label for="user">UN</label>
-  <input type="text" name="user">
-  <label for="pass">PW</label>
-  <input type="text" name="pass">
-  <button type="submit"></button>
+<form action="POST" class="formo" [formGroup]="form">
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Your Username here"
+      formControlName="username"
+      autocomplete="off"
+    />
+    <mat-error *ngIf="hasError('username', 'required')"
+      >Username is required.</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="password"
+      matInput
+      placeholder="Your Pasword here"
+      formControlName="password"
+    />
+    <mat-error *ngIf="hasError('password', 'required')"
+      >Password is required.</mat-error
+    >
+  </mat-form-field>
+  <button mat-raised-button [disabled]="form.invalid" > 
+    Log In
+  </button>
+  <!-- (clicked)="submitData()" -->
+  <!-- <mat-error *ngIf="!submitData()">Wrong Username or Password.</mat-error> -->
 </form>
