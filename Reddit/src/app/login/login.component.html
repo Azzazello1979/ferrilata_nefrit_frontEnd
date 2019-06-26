@@ -1,33 +1,14 @@
 <form action="POST" class="formo" [formGroup]="form">
-  <label for="username">UserName : </label>
-  <input
-    type="text"
-    id="username"
-    name="username"
-    placeholder="Your Username"
-    formControlName="username"
-    #username="ngModel"
-  />
+  <!-- (ngSubmit)="giveData()" -->
+  <label for="user">UN</label>
+  <input type="text" name="user" formControlName="username" />
   <div
-    class="unError"
-    *ngIf="username.errors && (username.pristine || username.touched)"
-  >
-    <h4 [hidden]="username.errors.required">"Username is required"</h4>
+    *ngIf="form.controls.['username'].invalid && (form.controls['username'].dirty || form.controls['username'].touched)">
+    <div *ngIf="angForm.controls['name'].errors.required">
+      Username is required.
+    </div>
   </div>
-  <label for="password">Password : </label>
-  <input
-    type="password"
-    id="password"
-    name="password"
-    placeholder="Your Password"
-    formControlName="username"
-    #password="ngModel"
-  />
-  <!-- <div
-    class="pwError"
-    *ngIf="password.errors && (password.dirty || password.touched)"
-  >
-    <h4 [hidden]="password.errors.required">"Password is required"</h4>
-  </div> -->
-  <button type="submit" (click)="submitData()" [disabled]="!form.valid">Log In</button>
+  <label for="pass">PW</label>
+  <input type="text" name="pass" />
+  <button type="submit"></button>
 </form>
