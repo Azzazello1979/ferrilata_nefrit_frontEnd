@@ -12,7 +12,7 @@ content: string;
 channel: string;
 timestamp: number;
 
-  constructor() { }
+  constructor(private posts: Posts) { }
 
   ngOnInit() {
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Posts } from '../posts.model';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,4 +29,12 @@ export class PostServiceService {
     }
   ];
   constructor() {}
+
+  getPosts(): any {
+    const postsObservables = new Observable(
+      observer => {
+      observer.next(this.posts);
+      }
+    );
+  }
 }
