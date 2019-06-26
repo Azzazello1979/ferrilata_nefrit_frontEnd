@@ -1,1 +1,9 @@
-<p>login works!</p>
+<form action="POST" class="formo" [formGroup]="form">
+    <label for="un">UserName : </label>
+    <input type="text" name="un" id="un" placeholder="Your Username" [(ngModel)]="username" formControlName="username" >
+    <!-- <h4 *ngIf=>"Username is required"</h4> -->
+    <label for="pw">Password : </label>
+    <input type="password" name="pw" id="pw" placeholder="Your Password" [(ngModel)]="password" formControlName="password" >
+    <!-- <h4 *ngIf=>"Password is required"</h4> -->
+    <button type="submit" [disabled]="!form.valid" >Log In</button> <!-- (click)="submitData()"  -->
+</form>
