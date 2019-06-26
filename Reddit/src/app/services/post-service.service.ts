@@ -36,5 +36,6 @@ export class PostServiceService {
       observer.next(this.posts);
       }
     );
+    return postsObservables;
   }
 }
