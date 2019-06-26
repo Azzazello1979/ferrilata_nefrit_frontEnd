@@ -32,7 +32,7 @@ export class PostServiceService {
   constructor(private http: HttpClient) {}
 
   getPosts(): any {
-    const request = this.http.get('http://localhost:3000/');
+    const request = this.http.get('http://localhost:3000/posts');
     const postsObservables = new Observable(
       observer => {
       observer.next(this.posts);
