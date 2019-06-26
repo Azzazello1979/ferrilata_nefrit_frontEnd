@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Posts } from '../posts.model';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,9 +29,10 @@ export class PostServiceService {
       timestamp: 6706756737405288449
     }
   ];
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getPosts(): any {
+    const request = this.http.get('http://localhost:3000/');
     const postsObservables = new Observable(
       observer => {
       observer.next(this.posts);
