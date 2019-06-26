@@ -14,7 +14,6 @@ content: string;
 channel: string;
 timestamp: number;
 posts: Posts[] = [];
-counter: number = 0;
 
   constructor(private postservice: PostServiceService) { }
 
