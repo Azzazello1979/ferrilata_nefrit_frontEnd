@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
+id: number;
+title: string;
+content: string;
+channel: string;
+timestamp: number;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }
