@@ -3,7 +3,7 @@
     <input
       type="text"
       matInput
-      placeholder="Your Username here"
+      placeholder="Your Username*"
       formControlName="username"
       autocomplete="off"
     />
@@ -15,16 +15,16 @@
     <input
       type="password"
       matInput
-      placeholder="Your Pasword here"
+      placeholder="Your Password*"
       formControlName="password"
     />
     <mat-error *ngIf="hasError('password', 'required')"
       >Password is required.</mat-error
     >
   </mat-form-field>
-  <button mat-raised-button [disabled]="form.invalid" > 
+  <button  mat-raised-button [disabled]="form.invalid" (click)="submitDataTry()"> 
     Log In
   </button>
-  <!-- (clicked)="submitData()" -->
-  <!-- <mat-error *ngIf="!submitData()">Wrong Username or Password.</mat-error> -->
+  <!-- (click)="submitData()" -->
+  <mat-error *ngIf="this.valid==false">Wrong Username or Password.</mat-error>
 </form>
