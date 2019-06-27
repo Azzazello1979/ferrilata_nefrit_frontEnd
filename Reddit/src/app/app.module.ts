@@ -10,8 +10,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
-  declarations: [AppComponent, PostsComponent],
+  declarations: [AppComponent, PostsComponent, ErrorDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatDividerModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   exports: [MatButtonModule, MatCheckboxModule],
   providers: [],
