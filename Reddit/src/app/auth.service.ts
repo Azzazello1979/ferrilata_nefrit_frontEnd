@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); //FIXME
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,9 @@ export class AuthService {
       user: username,
       word: password
     };
-    // send(token){
-    // if(response){return true /false }}
-    let token = jwt.sign(payload, 'secretKey');
-    return false
+    // if(response.message=="Wrong username or password."){return false}
+    // else{}
+    let token = jwt.sign(payload, 'secretKey'); //FIXME
+    return true
   }
 }
