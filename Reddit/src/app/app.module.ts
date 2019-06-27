@@ -11,6 +11,7 @@ import {
   MatInputModule,
   MatRippleModule
 } from '@angular/material';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import {
     MatInputModule,
     MatRippleModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
