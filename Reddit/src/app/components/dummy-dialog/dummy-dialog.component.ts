@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-dummy-dialog',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DummyDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: DialogService) { }
 
   ngOnInit() {
+    this.dialog.openError('Unknown Error', 400);
   }
 
 }
