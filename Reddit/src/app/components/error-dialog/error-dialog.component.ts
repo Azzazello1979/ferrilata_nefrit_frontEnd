@@ -13,6 +13,8 @@ export class ErrorDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data,
     public dialogRef: MatDialogRef<ErrorDialogComponent>
   ) {
+    dialogRef.disableClose = true;
+
     this.errormsg = data.message;
     this.statuscode = data.status;
   }
