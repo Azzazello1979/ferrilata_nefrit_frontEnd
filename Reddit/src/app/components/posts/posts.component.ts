@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-id: number;
-title: string;
-content: string;
-channel: string;
-timestamp: number;
-posts: Posts[] = [];
+  id: number;
+  title: string;
+  content: string;
+  channel: string;
+  timestamp: number;
+  posts: Posts[] = [];
 
-  constructor(private postservice: PostServiceService) { }
+  constructor(private postservice: PostServiceService) {}
 
   ngOnInit() {
     const postsObs = this.postservice.getPosts();
@@ -23,5 +23,4 @@ posts: Posts[] = [];
       this.posts = postData;
     });
   }
-
 }
