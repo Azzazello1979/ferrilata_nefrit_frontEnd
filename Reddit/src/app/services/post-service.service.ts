@@ -6,36 +6,36 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PostServiceService {
-  posts: Posts[] = [
-    {
-      id: '5d132cf4237ea11478a7e58a',
-      title: 'title',
-      content: 'content',
-      channel: 'channel',
-      timestamp: 6706754409533014017
-    },
-    {
-      id: '5d132f91237ea11478a7e58c',
-      title: 'title',
-      content: 'content',
-      channel: 'channel',
-      timestamp: 6706756737405288449
-    },
-    {
-      id: '5d132f91237ea11478a7e58c',
-      title: 'title',
-      content: 'content',
-      channel: 'channel',
-      timestamp: 6706756737405288449
-    }
-  ];
+  // posts: Posts[] = [
+  //   {
+  //     id: '5d132cf4237ea11478a7e58a',
+  //     title: 'title',
+  //     content: 'content',
+  //     channel: 'channel',
+  //     timestamp: 6706754409533014017
+  //   },
+  //   {
+  //     id: '5d132f91237ea11478a7e58c',
+  //     title: 'title',
+  //     content: 'content',
+  //     channel: 'channel',
+  //     timestamp: 6706756737405288449
+  //   },
+  //   {
+  //     id: '5d132f91237ea11478a7e58c',
+  //     title: 'title',
+  //     content: 'content',
+  //     channel: 'channel',
+  //     timestamp: 6706756737405288449
+  //   }
+  // ];
   constructor(private http: HttpClient) {}
 
   getPosts(): any {
     const request = this.http.get('http://localhost:3000/posts');
     const postsObservables = new Observable(
       observer => {
-      observer.next(this.posts);
+      observer.next(request);
       }
     );
     return postsObservables;
