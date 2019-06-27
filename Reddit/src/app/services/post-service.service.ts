@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,7 @@ export class PostServiceService {
         'Content-Type': 'application/json'
       })
     };
-    const request = this.http.get('http://localhost:3000/posts');
+    const request = this.http.get(environment.postsUrl, httpOptions);
     const postsObservables = new Observable(observer => {
       observer.next(request);
     });
