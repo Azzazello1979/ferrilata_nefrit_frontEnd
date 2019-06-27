@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-error-dialog',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./error-dialog.component.css']
 })
 export class ErrorDialogComponent implements OnInit {
-
-  constructor() { }
+errormsg: string;
+statuscode: number;
+  constructor(public dialogRef: MatDialogRef<ErrorDialogComponent>) { 
+    
+  }
 
   ngOnInit() {
     

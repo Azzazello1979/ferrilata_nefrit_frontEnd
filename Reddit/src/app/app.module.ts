@@ -12,8 +12,9 @@ import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
 @NgModule({
-  declarations: [AppComponent, PostsComponent, ErrorDialogComponent],
+  declarations: [AppComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
