@@ -28,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   exports: [MatButtonModule, MatCheckboxModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorDialogComponent]
 })
 export class AppModule {}

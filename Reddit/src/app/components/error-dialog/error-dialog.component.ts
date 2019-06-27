@@ -10,6 +10,7 @@ export class ErrorDialogComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }
