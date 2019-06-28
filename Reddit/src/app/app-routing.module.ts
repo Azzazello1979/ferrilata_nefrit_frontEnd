@@ -4,8 +4,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
 
 const routes: Routes = [
-  { path: '', component: PostsComponent },
-  { path: '', component: DummyDialogComponent },
+  { path: '', component: PostsComponent }
 ];
 
 @NgModule({
