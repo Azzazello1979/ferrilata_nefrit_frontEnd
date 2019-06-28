@@ -13,8 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 @NgModule({
-  declarations: [AppComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent],
+  declarations: [AppComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, DropdownComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
