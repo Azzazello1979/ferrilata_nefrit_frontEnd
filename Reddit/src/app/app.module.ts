@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [AppComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, DropdownComponent],
@@ -29,9 +30,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatListModule,
     HttpClientModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
-  exports: [MatButtonModule, MatCheckboxModule],
+  exports: [MatButtonModule, MatCheckboxModule, MatSelectModule],
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent]
