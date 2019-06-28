@@ -22,9 +22,8 @@
       >Password is required.</mat-error
     >
   </mat-form-field>
-  <button  mat-raised-button [disabled]="form.invalid" (click)="submitDataTry()"> 
+  <button type="button"  mat-raised-button [disabled]="form.invalid" (click)="submitData()"> 
     Log In
   </button>
-  <!-- (click)="submitData()" -->
   <mat-error *ngIf="this.valid==false">Wrong Username or Password.</mat-error>
 </form>
