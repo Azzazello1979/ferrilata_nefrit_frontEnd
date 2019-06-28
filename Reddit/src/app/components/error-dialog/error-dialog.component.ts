@@ -7,10 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorDialogComponent implements OnInit {
 
-  constructor(public : dialog) { }
+  constructor() { }
 
-  ngOnInit() {
-    
-  }
+
 
 }
