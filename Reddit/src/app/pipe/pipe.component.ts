@@ -7,44 +7,39 @@ import { Pipe, PipeTransform } from '@angular/core';
   styleUrls: ['./pipe.component.css']
 })
 
-
-
-
-@Pipe({ name: 'timeStamp' })
+@Pipe({ name: 'elapsedTime' })
 export class PipeComponent implements PipeTransform {
+//milliseconds
 
-  timeNow: any;
-  elapsedTime: any;
-  yearsAgo: any = this.elapsedTime / 31556926000;
-  monthsAgo: any = this.elapsedTime / 2629743000;
-  daysAgo: any = this.elapsedTime / 86400000;
-  hoursAgo: any = this.elapsedTime / 3600000;
+  timeNow: number;
+  elapsedTime: number;
+  year: number = 31556926000;
+  month: number = 2629743000;
+  day: number = 86400000;
+  hour: number = 3600000;
+  yearsAgo: any = this.elapsedTime / this.year;
+  monthsAgo: any = this.elapsedTime / this.month;
+  daysAgo: any = this.elapsedTime / this.day;
+  hoursAgo: any = this.elapsedTime / this.hour;
 
-  constructor() {
+  constructor() {}
+
+  transform(actionTimeStamp: number): string { // actionTimeStamp: any user action, like click or submit/post
     this.timeNow = Date.now();
-  }
-
-
-
-  transform(actionTimeStamp: any): any { // actionTimeStamp, like user click or user submit/post
     this.elapsedTime = this.timeNow - actionTimeStamp;
-    
 
-    if (this.elapsedTime > 31556926000) {
+    if (this.elapsedTime > this.year) {
       return (`${this.yearsAgo} years ago.`);
-    } else if (this.elapsedTime < 31556926000 && this.elapsedTime > 2629743000) {
+    } else if (this.elapsedTime < this.year && this.elapsedTime > this.month) {
       return (`${this.monthsAgo} months ago.`);
-    } else if (this.elapsedTime < 2629743000 && this.elapsedTime > 86400000) {
+    } else if (this.elapsedTime < this.month && this.elapsedTime > this.day) {
       return (`${this.daysAgo} days ago.`);
-    } else if (this.elapsedTime < 86400000 && this.elapsedTime > 3600000) {
+    } else if (this.elapsedTime < this.day && this.elapsedTime > this.hour) {
       return (`${this.hoursAgo} hours ago.`);
-    } else if (this.elapsedTime < 3600000) {
+    } else if (this.elapsedTime < this.hour) {
       return (`Just now.`);
     }
 
   }
-
-
-
 
 }
