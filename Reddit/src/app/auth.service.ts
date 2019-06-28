@@ -28,7 +28,7 @@ export class AuthService {
       username: username,
       password: password
     };
-    this.http.post('http://localhost:3000', payload, { headers: headers }).subscribe(
+    this.http.post('http://localhost:3000/login', payload, { headers: headers }).subscribe(
       res => {
         this.username.next({ succes: true, username });
         this.checker.next(true) 
