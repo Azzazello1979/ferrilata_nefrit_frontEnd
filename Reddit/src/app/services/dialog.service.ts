@@ -9,7 +9,12 @@ export class DialogService {
   constructor(private dialog: MatDialog) {}
 
   openError(ErrorMessage, ErrorStatus) {
-    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+
+    this.dialog.open(ErrorDialogComponent, {
+      data: { message: ErrorMessage, status: ErrorStatus }
+    });
+
+     this.dialog.open(ErrorDialogComponent, {
      data: { message: ErrorMessage, status: ErrorStatus }
     }
     );
