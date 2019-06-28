@@ -12,28 +12,32 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   valid: boolean = true;
 
-  constructor(private fb: FormBuilder, private router: Router,private authsvc:AuthService) { }
+  constructor(private fb: FormBuilder, private router: Router, private authsvc: AuthService) { }
 
   hasError(controlName: string, errorName: string) {
     return this.form.controls[controlName].hasError(errorName);
   }
 
-  submitData() {//NO SERVICE YET
-    // if (this.authsvc.sendData(this.form.get('username').value, this.form.get('password').value).response.statusCode == 200) {
-    if (this.authsvc.sendData(this.form.get('username').value, this.form.get('password').value)) { //is something
-      // this.authsvc.sendToken();
-      this.router.navigate(['/']);
-    } else {
-      // this.form.setValue({
-      //   ['username']: '',
-      //   ['password']: ''
-      // })
-      this.valid = false;
-      // setTimeout(() => {
-      //   this.valid = true;
-      // }, 5000)
-    }
+  submitData() {
+    this.authsvc.sendData(this.form.get('username').value, this.form.get('password').value);
+    this.authsvc.checker.subscribe(
+      res => {
+        if (res == true) {
+          this.router.navigate(['/']);
+          //       AND the token is saved into the local storage.
+          // this.authsvc.sendToken();
+          //       AND the refresh token is saved into the local storage.
+          // this.authsvc.sendToken();
+          //        AND the username is emitted (check description).
+        } else {
+          this.valid = false;
+          setTimeout(() => {
+            this.valid = true;
+          }, 3000)
+        }
+      })
   }
+
   ngOnInit() {
     this.form = this.fb.group({
       username: ['', [Validators.required]],
