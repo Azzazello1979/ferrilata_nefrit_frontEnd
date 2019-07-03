@@ -7,18 +7,18 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
   styleUrls: ['./dummy-dialog.component.css']
 })
 export class DummyDialogComponent implements OnInit {
-  displayableProperty: any = 'email';
+  displayableProperty: any = 'name';
   entities: any = [
     { name: 'Sally', age: 33, email: 'sally@gmail.com' },
     { name: 'John', age: 23, email: 'john@gmail.com' },
     { name: 'Art', age: 43, email: 'art@gmail.com' }
   ];
-
   selectedValue: any;
   defaultValue: any;
   constructor(private dialog: DialogService) {}
 
   ngOnInit() {
-    this.dialog.openError('Unknown Error', 400);   
+    // this.dialog.openError('Unknown Error', 400);
   }
+
 }
