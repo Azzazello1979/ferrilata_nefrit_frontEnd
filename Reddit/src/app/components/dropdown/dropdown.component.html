@@ -1,9 +1,12 @@
-<h4>Dropdown</h4>
-<mat-form-field>
-  <mat-label>Entities</mat-label>
-  <mat-select>
-    <mat-option>
-     
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<div [formGroup]="entity">
+  <h4>Dropdown</h4>
+  <mat-form-field>
+    <!-- <mat-label>Entities</mat-label> -->
+    <mat-select  placeholder="Please select" [(value)]="selectedValue" formControlName="entity">
+      <!-- <mat-option>Please select</mat-option> -->
+      <mat-option *ngFor="let entity of entities" [value]="entity[displayableProperty]">
+        {{entity[displayableProperty]}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
