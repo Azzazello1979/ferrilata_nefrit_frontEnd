@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -17,31 +17,28 @@ export class LoginComponent implements OnInit {
   hasError(controlName: string, errorName: string) {
     return this.form.controls[controlName].hasError(errorName);
   }
-
   submitData() {
-    this.authsvc.sendData(this.form.get('username').value, this.form.get('password').value);
-    this.authsvc.checker.subscribe(
-      res => {
-        if (res == true) {
-          this.router.navigate(['/']);
-          //       AND the token is saved into the local storage.
-          // this.authsvc.sendToken();
-          //       AND the refresh token is saved into the local storage.
-          // this.authsvc.sendToken();
-          //        AND the username is emitted (check description).
-        } else {
-          this.valid = false;
-          setTimeout(() => {
-            this.valid = true;
-          }, 3000)
-        }
-      })
+    let user = {
+      username: this.form.get('username').value,
+      password: this.form.get('password').value
+    }
+    this.authsvc.login(user).subscribe(
+      res => this.router.navigate(['/']),
+      err => {
+        console.log(err)
+        //NEED ERROR HANDLING
+        //   this.valid = false;
+        //     setTimeout(() => {
+        //       this.valid = true;
+        //     }, 3000)
+        // }
+      }
+    )
   }
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]]
-    });
+    ngOnInit() {
+      this.form = this.fb.group({
+        username: ['', [Validators.required]],
+        password: ['', [Validators.required]]
+      });
+    }
   }
-}
