@@ -23,22 +23,21 @@ export class LoginComponent implements OnInit {
       password: this.form.get('password').value
     }
     this.authsvc.login(user).subscribe(
-      res => this.router.navigate(['/']),
-      err => {
-        console.log(err)
-        //NEED ERROR HANDLING
-        //   this.valid = false;
-        //     setTimeout(() => {
-        //       this.valid = true;
-        //     }, 3000)
-        // }
-      }
-    )
+      res => {
+        if (!res) {
+          this.valid = false;
+          setTimeout(() => {
+            this.valid = true
+          }, 3000);
+        } else {
+          this.router.navigate(['']);
+        }
+      })
   }
-    ngOnInit() {
-      this.form = this.fb.group({
-        username: ['', [Validators.required]],
-        password: ['', [Validators.required]]
-      });
-    }
+  ngOnInit() {
+    this.form = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
   }
+}
