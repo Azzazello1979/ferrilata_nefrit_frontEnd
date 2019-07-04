@@ -9,27 +9,6 @@ import { Tokens } from './token';
   providedIn: 'root'
 })
 export class AuthService {
-  checker: any;
-
-
-  sendData(username: string, password: string) {
-    let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/json');
-    let payload = {
-      username: username,
-      password: password
-    };
-    this.http.post('http://localhost:3200/login', payload, { headers: headers }).subscribe(
-      res => {
-        console.log('apa');
-        this.checker.next(true)
-      },
-      err => {
-        console.log('anya');
-
-        this.checker.next(false)
-      })
-  };
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
@@ -45,9 +24,9 @@ export class AuthService {
   login(user: { username: string, password: string }): Observable<boolean> {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    return this.http.post<any>(`${config.apiUrl}/login`, user, { headers: headers })
+    return this.http.post<any>(`${config.apiUrl}/login`, user, { headers })
       .pipe(
-        tap(res => {this.doLoginUser(user.username, res.tokens)}),
+        tap(res => { this.doLoginUser(user.username, res.tokens) }),
         mapTo(true),
         catchError(error => {
           alert(error.error);
