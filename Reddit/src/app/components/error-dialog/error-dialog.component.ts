@@ -27,9 +27,4 @@ export class ErrorDialogComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-
-
-  constructor() { }
-
-
 }

@@ -13,10 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
+import { HeaderComponent } from 'src/app/components/header/header.component';
+
 @NgModule({
-  declarations: [AppComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent],
-@NgModule({
-  declarations: [AppComponent, PostsComponent],
+  declarations: [AppComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent],
 
   imports: [
     BrowserModule,
@@ -28,9 +28,10 @@ import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.com
     MatDividerModule,
     MatListModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
     HttpClientModule
-  ],
+    ],
+
   exports: [MatButtonModule, MatCheckboxModule],
   providers: [],
   bootstrap: [AppComponent],
