@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { PostsComponent } from './components/posts/posts.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PipeService } from './pipes/elapsedTimePipe';
 
 @NgModule({
   declarations: [AppComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, DropdownComponent],
@@ -34,7 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSelectModule
   ],
   exports: [MatButtonModule, MatCheckboxModule, MatSelectModule],
-  providers: [],
+  providers: [PipeService],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent]
 })
