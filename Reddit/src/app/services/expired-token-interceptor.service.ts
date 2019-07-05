@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthorizationService } from './authorization.service';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,10 @@ export class ExpiredTokenInterceptorService implements HttpInterceptor {
       // token in the header of the request: Authorization: Bearer xx.yy.zz
     }
     // if accessToken not present in local storage...
-    return next.handle(request).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && error.status === 401) {
+    // use catchError and listen for http errors...
+    return next.handle(request)
+    .pipe(catchError(error => {
+      if (error instanceof HttpErrorResponse && error.status === 401 && error.message === 'Expired token.') {
         return this.handle401Error(request, next);
       } else {
         return throwError(error);
