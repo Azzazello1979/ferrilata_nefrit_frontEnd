@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthorizationService } from './authorization.service';
 
@@ -14,13 +14,23 @@ export class ExpiredTokenInterceptorService implements HttpInterceptor {
   ) { }
 
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>{
-    
-    if (this._authorizationService.getAccessToken()) { // if accessToken is present in local storage...
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
+
+    // if accessToken is present in local storage...
+    if (this._authorizationService.getAccessToken()) {
       request = this.addToken(request, this._authorizationService.getAccessToken());
       // now, the captured request will be transformed by addToken() method and will contain the
       // token in the header of the request: Authorization: Bearer xx.yy.zz
     }
+    // if accessToken not present in local storage...
+    return next.handle(request).pipe(catchError(error => {
+      if (error instanceof HttpErrorResponse && error.status === 401) {
+        return this.handle401Error(request, next);
+      } else {
+        return throwError(error);
+      }
+    }));
+
   }
 
 
