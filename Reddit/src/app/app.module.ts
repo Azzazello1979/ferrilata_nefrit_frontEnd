@@ -6,6 +6,18 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from './auth.service';
+import { AuthInterceptor } from 'src/app/auth.interceptor';
+import { PostsComponent } from './components/posts/posts.component';
+import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { PipeService } from './pipes/elapsedTimePipe';
 import {
   MatButtonModule,
   MatFormFieldModule,
@@ -13,15 +25,7 @@ import {
   MatRippleModule,
   MatCheckboxModule
 } from '@angular/material';
-import { AuthService } from './auth.service';
-import { AuthInterceptor } from 'src/app/auth.interceptor';
-import { PostsComponent } from './components/posts/posts.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
-import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.com
     AppComponent,
     PostsComponent,
     ErrorDialogComponent,
-    DummyDialogComponent
+    DummyDialogComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,
@@ -47,21 +52,23 @@ import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.com
     MatCardModule,
     MatDividerModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   exports: [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ],
   providers: [AuthService
     , {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    }, PipeService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent]

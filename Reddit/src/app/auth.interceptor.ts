@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
         if (this.authService.getJwtToken()) {
             request = this.addToken(request, this.authService.getJwtToken());
         }
-
         return next.handle(request).pipe(catchError(error => {
             if (error instanceof HttpErrorResponse && error.status === 418) {
                 return this.handle418Error(request, next);
