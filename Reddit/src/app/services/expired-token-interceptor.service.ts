@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthorizationService } from './authorization.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ExpiredTokenInterceptorService implements HttpInterceptor{
 
-  constructor() { }
+  constructor(
+    private _authorizationService: AuthorizationService 
+    ){}
 
 
-  intercept(){
-
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>{
+    
   }
-
 
   
 
 }
+
+
+
+
