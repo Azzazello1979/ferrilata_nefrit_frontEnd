@@ -7,18 +7,31 @@ import { AuthorizationService } from './authorization.service';
   providedIn: 'root'
 })
 
-export class ExpiredTokenInterceptorService implements HttpInterceptor{
+export class ExpiredTokenInterceptorService implements HttpInterceptor {
 
   constructor(
-    private _authorizationService: AuthorizationService 
-    ){}
+    private _authorizationService: AuthorizationService
+  ) { }
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>{
-    
+    // if accessToken is present in local storage...
+    if (this._authorizationService.getAccessToken()) {
+      request = this.addToken(request, this._authorizationService.getAccessToken());
+    }
   }
 
-  
+
+  private addToken(request: HttpRequest<any>, token: string) {
+    return request.clone({
+      setHeaders: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+  }
+
+
+
 
 }
 

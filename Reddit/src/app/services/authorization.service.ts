@@ -5,5 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class AuthorizationService {
 
+  private readonly accessToken = 'accessToken';
+
   constructor() { }
+
+
+  getAccessToken() {
+    return localStorage.getItem(this.accessToken);
+  }
+
+
 }
