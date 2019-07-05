@@ -13,10 +13,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
+import { PipeService } from './pipes/elapsedTimePipe.ts'; 
+
+    
 @NgModule({
   declarations: [AppComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent],
-@NgModule({
-  declarations: [AppComponent, PostsComponent],
 
   imports: [
     BrowserModule,
@@ -32,7 +33,7 @@ import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.com
     HttpClientModule
   ],
   exports: [MatButtonModule, MatCheckboxModule],
-  providers: [],
+  providers: [PipeService],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent]
 })
