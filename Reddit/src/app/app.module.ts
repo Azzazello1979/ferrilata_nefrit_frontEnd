@@ -1,31 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS} from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PipeComponent } from './pipe/pipe.component';
-import { TokenInterceptorService } from './services/token-interceptor.service';
+import { PostsComponent } from './components/posts/posts.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
+
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PipeComponent
-    
-  ],
+  declarations: [AppComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent],
+
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatDividerModule,
+    MatListModule,
+    HttpClientModule,
+    MatDialogModule,
+    HttpClientModule
   ],
-  providers: [
-
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorService,
-      multi: true
-    }
-    
-  ],
-  bootstrap: [AppComponent]
+  exports: [MatButtonModule, MatCheckboxModule],
+  providers: [],
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorDialogComponent]
 })
 export class AppModule { }
