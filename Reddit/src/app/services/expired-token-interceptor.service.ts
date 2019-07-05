@@ -15,9 +15,11 @@ export class ExpiredTokenInterceptorService implements HttpInterceptor {
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>{
-    // if accessToken is present in local storage...
-    if (this._authorizationService.getAccessToken()) {
+    
+    if (this._authorizationService.getAccessToken()) { // if accessToken is present in local storage...
       request = this.addToken(request, this._authorizationService.getAccessToken());
+      // now, the captured request will be transformed by addToken() method and will contain the
+      // token in the header of the request: Authorization: Bearer xx.yy.zz
     }
   }
 
