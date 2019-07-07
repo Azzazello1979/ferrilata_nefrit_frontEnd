@@ -9,7 +9,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./error-dialog.component.css']
 })
 export class ErrorDialogComponent implements OnInit {
-
   errormsg: string;
   statuscode: number;
   constructor(

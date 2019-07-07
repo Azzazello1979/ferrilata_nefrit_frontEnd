@@ -4,9 +4,32 @@
     justify-content: space-between;
     align-items: center;
     color: white;
-    padding: 12px;
+    padding: 20px;
+    font-family: fantasy;
+    font-size: 25px;
+    width: 100vw;
+    height: 10vh;
 }
 
+.navbar-logo,
 .logo {
-    height: 40px;
+    height: 10vh;
+    padding: 0px;
+    margin-left: 10px;
+}
+
+.navbar-button {
+    background-color: white;
+    font-family: fantasy;
+    padding: 10px 40px;
+    margin-right: 25px;
+    border-radius: 10px;
+}
+
+.dropdown-item {
+    display: flex;
+    border: 5px solid darkred;
+    border-radius: 20px;
+    padding: 0 5px;
+    background-color: white;
 }

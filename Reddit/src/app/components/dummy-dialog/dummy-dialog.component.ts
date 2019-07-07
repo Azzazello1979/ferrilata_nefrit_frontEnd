@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'src/app/services/dialog.service';
-
 @Component({
   selector: 'app-dummy-dialog',
   templateUrl: './dummy-dialog.component.html',
