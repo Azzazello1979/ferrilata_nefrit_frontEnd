@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { of, Observable } from 'rxjs';
-import { catchError, mapTo, tap } from 'rxjs/operators';
-
+import { tap } from 'rxjs/operators';
 import { Tokens } from '../models/tokens';
 
 
@@ -46,6 +44,7 @@ export class AuthorizationService {
 
 
  // send locally stored refreshToken to /refresh endpoint
+ // this is an observable
   doRefreshToken() {
     return this.http.post<any>(`${this.API_URL}/refresh`, {
       'refreshToken': this.getRefreshToken()
