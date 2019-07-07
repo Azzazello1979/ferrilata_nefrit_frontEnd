@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { PipeService } from './pipes/elapsedTimePipe';
+import { ExpiredTokenInterceptorService } from './services/expired-token-interceptor.service';
 import {
   MatButtonModule,
   MatFormFieldModule,
@@ -68,7 +69,12 @@ import {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }, PipeService
+    }, PipeService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ExpiredTokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent]
