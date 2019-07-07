@@ -27,8 +27,8 @@ export class ExpiredTokenInterceptorService implements HttpInterceptor {
       // access token in the header of the request: Authorization: Bearer xx.yy.zz
     }
 
-
-    // Error handling for 401 - unauthorized (access token changed)
+    // when interceptor catches 401 error code in request, it runs refreshAfter401() method
+    // this 401 happens when access token changes
     // use catchError and listen for http errors...
     // handle modified request to next interceptor - or backend
     // if error is HttpErrorResponse of 401, try to refresh token
@@ -59,7 +59,7 @@ export class ExpiredTokenInterceptorService implements HttpInterceptor {
 
   private refreshAfter401(request: HttpRequest<any>, next: HttpHandler) {
     // execute token refreshing
-    if (!this.isRefreshingInProgress) { // entering if isRefreshingInProgress = false
+    if (!this.isRefreshingInProgress) { // entering if isRefreshingInProgress = false (so refreshing hasnt started yet)
       this.isRefreshingInProgress = true;
       this.refreshTokenSubject.next(null);
       // the next emit from this subject will be null
@@ -79,18 +79,25 @@ export class ExpiredTokenInterceptorService implements HttpInterceptor {
             this.isRefreshingInProgress = false;
             // once we have new access token, we can indicate that refreshing finished...
             this.refreshTokenSubject.next(token.jwt);
-            // ... and set refreshTokenSubject next emit to the fresh access token
+            // we get the new access token ... and set refreshTokenSubject next emit to the fresh access token
             return next.handle(this.addToken(request, token.jwt));
           }));
 
+      // during refreshing: after requesting new access token and before receiving it back,
+      // new httprequest may happen and interceptor may catch them and process them ...
+      //
       // blocking & releaseing all other queries that started during 
       // the refreshing process, which we want to put on hold until we have new 
       // access token
     } else {
-      return this.refreshTokenSubject.pipe(
+      return this.refreshTokenSubject
+      // during refreshing, the value inside this subject is null
+      .pipe(
         filter(token => token != null),
-        take(1),
-        switchMap(jwt => {
+        // this filter would block all requests until the value inside that subject is different than null,
+        // that happens in line 81 
+        take(1), // transform to observable which will finish after taking 1 event from the subject
+        switchMap(jwt => { // then unblock the query that started in line 91
           return next.handle(this.addToken(request, jwt));
         }));
     }
