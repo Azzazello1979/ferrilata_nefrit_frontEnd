@@ -19,6 +19,6 @@ export class PostServiceService {
     const postsObservables = new Observable(observer => {
       observer.next(request);
     });
-    return postsObservables;
+    return request;
   }
 }
