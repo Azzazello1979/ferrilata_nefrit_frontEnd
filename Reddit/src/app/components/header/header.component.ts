@@ -24,23 +24,10 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    this.authsvc.logout();
-    this.authsvc.loggedUser.subscribe(
-      res => {
-        this.userName = this.authsvc.loggedUser.value;
-      },
-      err => console.log(err)
-    )
-    console.log(this.authsvc.loggedUser)
-
+    this.authsvc.logout().subscribe();
   }
 
-  ngDoCheck() {
-    this.authsvc.loggedUser.subscribe(
-      res => {
-        this.userName = this.authsvc.loggedUser.value;
-      },
-      err => console.log(err)
-    )
+  isLoggedIn() {
+    return this.authsvc.isLoggedIn()
   }
 }

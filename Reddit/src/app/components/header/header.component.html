@@ -3,13 +3,6 @@
         <img class="logo" src="/assets/duck-transparent-toy-2.png">
     </a>
     <app-dropdown class="dropdown-item"></app-dropdown>
-    <button type="button" mat-raised-button routerLink="/login"> 
-        <p *ngIf="userName; then loggedIn else loggedOut"></p>
-      </button>
-    <ng-template #loggedIn>
-        <p (click)="logOut()" routerLink="/"> Welcome {{userName}} <br> Logout </p>
-    </ng-template>
-    <ng-template #loggedOut>
-        <p>Login</p>
-    </ng-template>
+    <button *ngIf="isLoggedIn()" mat-raised-button (click)="logOut() " routerLink="/">  Welcome {{userName}} <br> Logout</button>
+    <button *ngIf="!isLoggedIn()" mat-raised-button routerLink="/login"> Login</button>
 </nav>
