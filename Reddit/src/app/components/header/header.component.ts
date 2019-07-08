@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/auth.service';
+import { longStackSupport } from 'q';
 
 @Component({
   selector: 'app-header',
@@ -10,16 +11,36 @@ import {AuthService } from 'src/app/auth.service';
 export class HeaderComponent implements OnInit {
 
   userName: string;
-  
+
   constructor(private authsvc: AuthService, private router: Router) { }
-  
+
   ngOnInit() {
     this.authsvc.loggedUser.subscribe(
       res => {
         this.userName = this.authsvc.loggedUser.value;
-        console.log(this.userName)
       },
       err => console.log(err)
-    ) 
+    )
+  }
+
+  logOut() {
+    this.authsvc.logout();
+    this.authsvc.loggedUser.subscribe(
+      res => {
+        this.userName = this.authsvc.loggedUser.value;
+      },
+      err => console.log(err)
+    )
+    console.log(this.authsvc.loggedUser)
+
+  }
+
+  ngDoCheck() {
+    this.authsvc.loggedUser.subscribe(
+      res => {
+        this.userName = this.authsvc.loggedUser.value;
+      },
+      err => console.log(err)
+    )
   }
 }

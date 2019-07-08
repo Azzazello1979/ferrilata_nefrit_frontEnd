@@ -6,6 +6,10 @@
     <button type="button" mat-raised-button routerLink="/login"> 
         <p *ngIf="userName; then loggedIn else loggedOut"></p>
       </button>
-    <ng-template #loggedIn> Welcome {{userName}} <br> Logout</ng-template>
-    <ng-template #loggedOut> Login</ng-template>
+    <ng-template #loggedIn>
+        <p (click)="logOut()" routerLink="/"> Welcome {{userName}} <br> Logout </p>
+    </ng-template>
+    <ng-template #loggedOut>
+        <p>Login</p>
+    </ng-template>
 </nav>
