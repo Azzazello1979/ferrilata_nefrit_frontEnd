@@ -3,7 +3,7 @@
         <mat-label>Channels</mat-label>
         <mat-select (selectionChange)="outputEntity($event)" placeholder="Please select" [(value)]="selectedValue" formControlName="entity">
             <mat-option *ngFor="let entity of entities" [value]="entity[displayableProperty]">
-                {{entity[displayableProperty]}}
+                {{entity}}
             </mat-option>
         </mat-select>
     </mat-form-field>
