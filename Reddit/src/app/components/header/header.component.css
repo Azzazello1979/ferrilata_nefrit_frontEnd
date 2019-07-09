@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    background-color: black;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 20px;
+    width: 100vw;
+    height: 10vh;
+}
+
+.navbar-logo,
+.logo {
+    height: 10vh;
+    padding: 0px;
+    margin-left: 10px;
+}
+
+.dropdown-item {
+    display: flex;
+    border: 5px solid darkred;
+    border-radius: 20px;
+    padding: 0 5px;
+    background-color: white;
+}
