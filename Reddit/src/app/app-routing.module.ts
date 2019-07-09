@@ -9,7 +9,6 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: '',
@@ -18,6 +17,11 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  }
+  ,{
+    path: '/submit',
+    component: SubmitComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
