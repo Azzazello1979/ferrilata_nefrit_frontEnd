@@ -26,9 +26,10 @@ import {
   MatRippleModule,
   MatCheckboxModule
 } from '@angular/material';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent,DummyDialogComponent, DropdownComponent],
+  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent,DummyDialogComponent, DropdownComponent, RegisterComponent],
 
   imports: [
     BrowserModule,
