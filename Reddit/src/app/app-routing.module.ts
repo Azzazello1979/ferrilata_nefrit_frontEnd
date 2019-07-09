@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { PostsComponent } from './components/posts/posts.component';
-import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: '',
     component: PostsComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   }
 ];
 
