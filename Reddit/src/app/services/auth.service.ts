@@ -21,6 +21,18 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  register(user: { username: string, password: string }): Observable<boolean> {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    return this.http.post<any>(`${config.apiUrl}/register`, user, { headers })
+      .pipe(
+        tap(res => { this.doLoginUser(user.username, res.tokens) }),
+        mapTo(true),
+        catchError(error => {
+          return of(false);
+        }));
+  }
+
   login(user: { username: string, password: string }): Observable<boolean> {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
