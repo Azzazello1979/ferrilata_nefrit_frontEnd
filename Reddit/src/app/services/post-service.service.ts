@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class PostServiceService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}  
 
   getPosts(): any {
     const httpOptions = {
@@ -20,6 +20,6 @@ export class PostServiceService {
     const postsObservables = new Observable(observer => {
       observer.next(request);
     });
-    return postsObservables;
+    return request;
   }
 }
