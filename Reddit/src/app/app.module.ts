@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { MatSelectModule } from '@angular/material/select';
 import { PipeService } from './pipes/elapsedTimePipe';
 import {
@@ -26,17 +27,9 @@ import {
   MatCheckboxModule
 } from '@angular/material';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    AppComponent,
-    PostsComponent,
-    ErrorDialogComponent,
-    DummyDialogComponent,
-    DropdownComponent
-  ],
+  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent,DummyDialogComponent, DropdownComponent],
+
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -51,10 +44,12 @@ import {
     MatCheckboxModule,
     MatCardModule,
     MatDividerModule,
-    MatListModule,
+    MatListModule, 
     MatDialogModule,
+    HttpClientModule,
     MatSelectModule
   ],
+
   exports: [
     MatButtonModule,
     MatFormFieldModule,
@@ -70,6 +65,7 @@ import {
       multi: true
     }, PipeService
   ],
+
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent]
 })
