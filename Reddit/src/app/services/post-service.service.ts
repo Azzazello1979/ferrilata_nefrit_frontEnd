@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class PostServiceService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}  
 
   getPosts(): any {
     const httpOptions = {

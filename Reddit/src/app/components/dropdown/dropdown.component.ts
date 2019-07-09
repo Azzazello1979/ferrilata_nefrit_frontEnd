@@ -23,8 +23,8 @@ export class DropdownComponent implements OnInit {
     entity: [null, Validators.required]
     });
     this.entity.get('entity').setValue(this.defaultValue);
-
   }
+  
   outputEntity(event: any) {
     this.selectionChange.emit(event);
   }

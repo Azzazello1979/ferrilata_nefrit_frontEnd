@@ -35,17 +35,16 @@ export class AuthService {
 
   logout() {
     return this.http.post<any>(`${config.apiUrl}/logout`, {
-        'refreshToken': this.getRefreshToken()
+      'refreshToken': this.getRefreshToken()
     }).pipe(
-        tap(() => {this.doLogoutUser()
-        console.log('blabla')}
-        ),
-        mapTo(true),
-        catchError(error => {
-            return of(false);
-        }));
-}
-
+      tap(() => {
+        this.doLogoutUser()
+      }),
+      mapTo(true),
+      catchError(error => {
+        return of(false);
+      }));
+  }
 
   isLoggedIn() {
     return !!this.getJwtToken();
