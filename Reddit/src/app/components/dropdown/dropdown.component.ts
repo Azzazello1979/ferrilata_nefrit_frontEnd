@@ -1,31 +1,41 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
-import { MatSelectChange } from '@angular/material';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatSelectChange } from "@angular/material";
+import { ChannelService } from "src/app/services/channel.service";
+
 @Component({
-  selector: 'app-dropdown',
-  templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.css']
+  selector: "app-dropdown",
+  templateUrl: "./dropdown.component.html",
+  styleUrls: ["./dropdown.component.css"]
 })
 export class DropdownComponent implements OnInit {
-
   entity: FormGroup;
+  channels: string[];
 
   @Input() private entities: any;
   @Input() private displayableProperty: string;
   @Input() private defaultValue: string;
   @Output() selectionChange: EventEmitter<MatSelectChange> = new EventEmitter();
-  constructor(private formBuilder: FormBuilder) {
-
-    }
+  constructor(
+    private formBuilder: FormBuilder,
+    private channelsvc: ChannelService
+  ) {}
 
   ngOnInit() {
     this.entity = this.formBuilder.group({
-    entity: [null, Validators.required]
+      entity: [null, Validators.required]
     });
-    this.entity.get('entity').setValue(this.defaultValue);
+    this.entity.get('entity').setValue(event);
   }
-  
+
   outputEntity(event: any) {
     this.selectionChange.emit(event);
+  }
+
+  getChannels() {
+    const receivedChannels = this.channelsvc.getChannels();
+    receivedChannels.subscribe((channelsvcData:[]) => {
+      this.channels = channelsvcData;
+    });
   }
 }
