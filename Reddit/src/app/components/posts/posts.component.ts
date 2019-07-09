@@ -15,12 +15,12 @@ export class PostsComponent implements OnInit {
   timestamp: number;
   posts: Posts[] = [];
 
-  constructor(private postservice: PostServiceService) {}
+  constructor(private postservice: PostServiceService) { }
 
   ngOnInit() {
-    const postsObs = this.postservice.getPosts();
-    postsObs.subscribe((postData: Posts[]) => {
-      this.posts = postData;
-    });
+    this.postservice.getPosts().subscribe(
+      (postData: Posts[]) => {
+        this.posts = postData;
+      });
   }
 }

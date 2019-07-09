@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
-import { config } from './config';
-import { Tokens } from './token';
+import { config } from '../config';
+import { Tokens } from '../token';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +33,13 @@ export class AuthService {
         }));
   }
 
-  logout() {
+  logout(): Observable<boolean> {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', `Bearer ${this.getJwtToken()}`);
     return this.http.post<any>(`${config.apiUrl}/logout`, {
       'refreshToken': this.getRefreshToken()
-    }).pipe(
+    }, {}).pipe(
       tap(() => this.doLogoutUser()),
       mapTo(true),
       catchError(error => {
