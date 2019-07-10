@@ -14,7 +14,13 @@ const routes: Routes = [
   {
     path: '',
     component: PostsComponent
-  }
+  },
+
+  {
+    path: ':channel',
+    pathMatch: 'prefix',
+    redirectTo: ''
+   }
 ];
 
 @NgModule({

@@ -8,19 +8,25 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChannelService {
-
-  constructor(private http: HttpClient) { }
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  constructor(private http: HttpClient) { 
+  
+  };
 
   getChannels() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    const request = this.http.get(environment.channelUrl, httpOptions);
+    
+    const request = this.http.get(environment.channelUrl, this.httpOptions);
     const channelObs = new Observable<any>(observer => {
       observer.next(request);
     });
     return request;
+  }
+
+  getSelectedChannel(channel){
+     return this.http.get(environment.channelUrl + `/${channel}`, this.httpOptions);
   }
 }
