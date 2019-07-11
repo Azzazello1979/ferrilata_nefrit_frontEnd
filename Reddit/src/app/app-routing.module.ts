@@ -1,21 +1,34 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { LoginComponent } from "./login/login.component";
-import { AuthGuard } from "./auth.guard";
-import { PostsComponent } from "./components/posts/posts.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './auth.guard';
+import { PostsComponent } from './components/posts/posts.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
-    path: "login",
+    path: 'login',
     component: LoginComponent,
-    canActivate: [AuthGuard]
   },
-  { path: ":channel", component: PostsComponent },
-  { path: "", component: PostsComponent }
+  { path: ':channel', component: PostsComponent },
+ 
+  {
+    path: '',
+    component: PostsComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  }
+  ,{
+    path: '/submit',
+    component: SubmitComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -16,6 +16,7 @@ export class PostsComponent implements OnInit {
   timestamp: number;
   posts: Posts[] = [];
 
+<<<<<<< HEAD
   constructor(
     private postservice: PostServiceService,
     private route: ActivatedRoute
@@ -35,5 +36,14 @@ export class PostsComponent implements OnInit {
           });
       }
     });
+=======
+  constructor(private postservice: PostServiceService) { }
+
+  ngOnInit() {
+    this.postservice.getPosts().subscribe(
+      (postData: Posts[]) => {
+        this.posts = postData;
+      });
+>>>>>>> master
   }
 }

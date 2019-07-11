@@ -3,10 +3,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from 'src/app/auth.interceptor';
 import { PostsComponent } from './components/posts/posts.component';
 import { DummyDialogComponent } from './components/dummy-dialog/dummy-dialog.component';
@@ -26,9 +26,10 @@ import {
   MatRippleModule,
   MatCheckboxModule
 } from '@angular/material';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent,DummyDialogComponent, DropdownComponent],
+  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent,DummyDialogComponent, DropdownComponent, RegisterComponent],
 
   imports: [
     BrowserModule,
