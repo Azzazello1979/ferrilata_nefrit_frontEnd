@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatSelectChange } from "@angular/material";
 import { ChannelService } from "src/app/services/channel.service";
-import { Observable,BehaviorSubject } from 'rxjs';
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-dropdown",
@@ -12,8 +12,7 @@ import { Observable,BehaviorSubject } from 'rxjs';
 export class DropdownComponent implements OnInit {
   entity: FormGroup;
   channels: string[];
-  public selectedValue: BehaviorSubject<string> = new BehaviorSubject('');
-  obs = this.selectedValue.asObservable();
+  public selectedValue;
 
   @Input() private entities: any;
   @Input() private displayableProperty: string;
@@ -22,11 +21,12 @@ export class DropdownComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private channelsvc: ChannelService
+    private channelsvc: ChannelService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    const receivedChannels = this.channelsvc.getChannels();
+    const receivedChannels = this.channelsvc.getAllChannels();
     receivedChannels.subscribe((channelsvcData: any) => {
       this.channels = channelsvcData;
       this.entities = this.channels;
@@ -38,8 +38,6 @@ export class DropdownComponent implements OnInit {
   }
 
   outputEntity(event: any) {
-    /*     this.selectionChange.emit(event);*/
-    this.channelsvc.getSelectedChannel(this.selectedValue);
-
+    this.router.navigate([`/${this.selectedValue}`]);
   }
 }
