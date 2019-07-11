@@ -22,26 +22,18 @@ export class PostsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    /* const postsObs = this.postservice.getPosts();
-    postsObs.subscribe((postData: Posts[]) => {
-      this.posts = postData;
-    }); */
     this.route.params.subscribe((selectedChannel: Params) => {
-      this.postservice
-        .filterPosts(selectedChannel)
-        .subscribe((postData: Posts[]) => {
+      if (Object.keys(selectedChannel).length === 0) {
+        this.postservice.getPosts().subscribe((postData: Posts[]) => {
           this.posts = postData;
         });
-    });
-  }
-
-  ngOnChanges() {
-    this.route.params.subscribe((selectedChannel: Params) => {
-      this.postservice
-        .filterPosts(selectedChannel)
-        .subscribe((postData: Posts[]) => {
-          this.posts = postData;
-        });
+      } else {
+        this.postservice
+          .filterPosts(selectedChannel)
+          .subscribe((postData: Posts[]) => {
+            this.posts = postData;
+          });
+      }
     });
   }
 }

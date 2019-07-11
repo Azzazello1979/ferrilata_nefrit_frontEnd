@@ -14,9 +14,9 @@ export class DropdownComponent implements OnInit {
   channels: string[];
   public selectedValue;
 
-  @Input() private entities: any;
-  @Input() private displayableProperty: string;
-  @Input() private defaultValue: string;
+  @Input() entities: any;
+  @Input()  displayableProperty: string;
+  @Input()  defaultValue: string;
   @Output() selectionChange: EventEmitter<MatSelectChange> = new EventEmitter();
 
   constructor(
