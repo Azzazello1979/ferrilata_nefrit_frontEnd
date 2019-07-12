@@ -1,0 +1,24 @@
+<div class="container">
+    <h1>Create new post</h1>
+    <form>
+        <div class="form-group">
+            <label for="name">Title</label>
+            <input type="text" class="form-control" id="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="content">content</label>
+            <input type="text" class="form-control" id="content">
+        </div>
+        <mat-form-field>
+            <mat-label>Channels</mat-label>
+            <mat-select (selectionChange)="outputEntity($event)" [(value)]="selectedValue" formControlName="channelz">
+                <mat-option *ngFor=" let channel of channels " [value]="entity ">
+                    {{entity}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+</div>

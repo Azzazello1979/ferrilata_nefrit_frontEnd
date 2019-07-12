@@ -27,9 +27,10 @@ import {
   MatCheckboxModule
 } from '@angular/material';
 import { RegisterComponent } from './components/register/register.component';
+import { SubmitComponent } from './components/submit/submit.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent,DummyDialogComponent, DropdownComponent, RegisterComponent],
+  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent,DummyDialogComponent, DropdownComponent, RegisterComponent, SubmitComponent],
 
   imports: [
     BrowserModule,

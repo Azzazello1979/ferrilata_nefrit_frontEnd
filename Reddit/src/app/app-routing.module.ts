@@ -4,12 +4,17 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { PostsComponent } from './components/posts/posts.component';
 import { RegisterComponent } from './components/register/register.component';
+import {SubmitComponent} from './components/submit/submit.component'
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
   },
+  {
+  path: 'submit',  component: SubmitComponent,
+  //canActivate: [AuthGuard]
+},
   { path: ':channel', component: PostsComponent },
  
   {
@@ -19,11 +24,6 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  }
-  ,{
-    path: '/submit',
-    component: SubmitComponent,
-    canActivate: [AuthGuard]
   }
 ];
 
