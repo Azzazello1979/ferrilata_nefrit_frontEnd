@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatSelectChange } from "@angular/material";
 import { ChannelService } from "src/app/services/channel.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: "app-dropdown",
@@ -15,14 +14,13 @@ export class DropdownComponent implements OnInit {
   public selectedValue;
 
   @Input() entities: any;
-  @Input()  displayableProperty: string;
-  @Input()  defaultValue: string;
-  @Output() selectionChange: EventEmitter<MatSelectChange> = new EventEmitter();
+  @Input() displayableProperty: string;
+  @Input() defaultValue: string;
+  @Output() selectionChange = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
     private channelsvc: ChannelService,
-    private router: Router
   ) {}
 
   ngOnInit() {
@@ -38,6 +36,6 @@ export class DropdownComponent implements OnInit {
   }
 
   outputEntity(event: any) {
-    this.router.navigate([`/${this.selectedValue}`]);
+    this.selectionChange.emit(this.entity.value.entity);
   }
 }

@@ -26,6 +26,8 @@ export class ChannelService {
   }
 
   getSelectedChannel(channel) {
+    this.router.navigate([`/channel`]);
+
     const request = this.http.get(environment.channelUrl + channel);
     const selectedChannels = new Observable(observer => {
       observer.next(request);
