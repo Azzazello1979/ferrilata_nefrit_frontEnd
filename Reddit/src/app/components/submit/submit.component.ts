@@ -1,37 +1,40 @@
 import { Component, OnInit } from "@angular/core";
 import { ChannelService } from "src/app/services/channel.service";
-import { FormBuilder, FormGroup, Validators, NgForm } from "@angular/forms";
-import {ActivatedRoute, Router, RouterEvent, RouterLink} from '@angular/router'
-import {ViewChild, ElementRef} from '@angular/core';
-
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-submit",
   templateUrl: "./submit.component.html",
   styleUrls: ["./submit.component.css"]
 })
-
-
-
 export class SubmitComponent implements OnInit {
-  post = {}
-  activeRoutedService: any;
-/*   @ViewChild('submit2') nameInputRef: ElementRef;
- */
+  form: FormGroup;
+  valid: boolean = true;
+  channel: string;
 
-  constructor(private channelsvc: ChannelService, private router: Router) {}
-  entity: FormGroup;
-  channels: string[];
-  public selectedValue;
+  constructor(private fb: FormBuilder) {}
+
+  hasError(controlName: string, errorName: string) {
+    return this.form.controls[controlName].hasError(errorName);
+  }
+  outputEntity($event: any) {
+    this.channel = $event;
+  }
+
+  submitData() {
+    let post = {
+      title: this.form.get("title").value,
+      content: this.form.get("content").value,
+      channel: this.channel
+    };
+    console.log(post);
+  }
 
   ngOnInit() {
-        }
-
-  addPost(form: NgForm) {
-    const value = form.value;
+    this.form = this.fb.group({
+      title: ["", [Validators.required]],
+      content: ["", [Validators.required, Validators.maxLength(10)]],  
+      channel: ['this.channel',  [Validators.required]]
+    });
   }
-/*   createBook(){
-    this.router.navigate(['/login'])
-    this.
-  } */
 }

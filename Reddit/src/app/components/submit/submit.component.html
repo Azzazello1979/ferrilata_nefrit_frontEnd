@@ -1,15 +1,18 @@
-<div class="container">
-    <h1>Create new post</h1>
-    <form>
-        <div class="form-group">
-            <label for="name">Title</label>
-            <input type="text" class="form-control" id="name">
-        </div>
-        <div class="form-group">
-            <label for="content">content</label>
-            <input type="text" class="form-control" id="content">
-        </div>
-        <app-dropdown #submit2></app-dropdown>
-        <button type="submit" class="btn btn-success" (click)="addPost()">Submit</button>
-    </form>
-</div>
+<form action="submit" class="formo" [formGroup]="form">
+    <mat-form-field>
+        <input type="text" matInput placeholder="Title*" formControlName="title" autofocus/>
+        <mat-error *ngIf="hasError('title', 'required')">Title is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <textarea type="text" matInput rows="10" cols="150" placeholder="Type your post here*" formControlName="content"></textarea>
+        <mat-error *ngIf="hasError('content', 'required')">Content is required.</mat-error>
+        <mat-error *ngIf="hasError('content', 'maxlength')">Content can't be longer than 255 characters.</mat-error>
+
+    </mat-form-field>
+    <app-dropdown class="dropdown-item" (selectionChange)="outputEntity($event)">
+        <mat-error *ngIf="hasError('channel', 'required')">Channel is required.</mat-error>
+    </app-dropdown>
+    <button type="submit" mat-raised-button [disabled]="form.invalid" (click)="submitData()"> 
+         Submit
+        </button>
+</form>
