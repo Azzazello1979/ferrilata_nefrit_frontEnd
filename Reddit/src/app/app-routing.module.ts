@@ -10,6 +10,8 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+  { path: ':channel', component: PostsComponent },
+ 
   {
     path: '',
     component: PostsComponent
@@ -18,11 +20,11 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   }
-  ,{
+  ,/* {
     path: '/submit',
     component: SubmitComponent,
     canActivate: [AuthGuard]
-  }
+  } */
 ];
 
 @NgModule({

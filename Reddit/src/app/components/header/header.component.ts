@@ -9,7 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  userName: string;
+ userName: string;
+ channel: string;
 
   constructor(private authsvc: AuthService, private router: Router) { }
 
@@ -28,5 +29,10 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn() {
     return this.authsvc.isLoggedIn()
+  }
+
+  selectedChannel($event: string) {
+    this.channel = $event;
+    this.router.navigate([`/${this.channel}`]);
   }
 }
