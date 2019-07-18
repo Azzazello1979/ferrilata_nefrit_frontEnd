@@ -1,4 +1,4 @@
-<form action="submit" class="formo" [formGroup]="form">
+<form action="submit" class="formo" [formGroup]="submitForm">
     <mat-form-field>
         <input type="text" matInput placeholder="Title*" formControlName="title" autofocus/>
         <mat-error *ngIf="hasError('title', 'required')">Title is required.</mat-error>
@@ -9,10 +9,9 @@
         <mat-error *ngIf="hasError('content', 'maxlength')">Content can't be longer than 255 characters.</mat-error>
 
     </mat-form-field>
-    <app-dropdown class="dropdown-item" (selectionChange)="outputEntity($event)">
-        <mat-error *ngIf="hasError('channel', 'required')">Channel is required.</mat-error>
+    <app-dropdown [entity]="submitForm">
     </app-dropdown>
-    <button type="submit" mat-raised-button [disabled]="form.invalid" (click)="submitData()"> 
+    <button type="button" mat-raised-button [disabled]="submitForm.invalid" (click)="submitData()"> 
          Submit
         </button>
 </form>

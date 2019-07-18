@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatSelectChange } from "@angular/material";
 import { ChannelService } from "src/app/services/channel.service";
 
 @Component({
@@ -9,10 +8,9 @@ import { ChannelService } from "src/app/services/channel.service";
   styleUrls: ["./dropdown.component.css"]
 })
 export class DropdownComponent implements OnInit {
-  entity: FormGroup;
+  @Input() entity: FormGroup;
+  selectedValue: string;
   channels: string[];
-  public selectedValue;
-
   @Input() entities: any;
   @Input() displayableProperty: string;
   @Input() defaultValue: string;
@@ -20,7 +18,7 @@ export class DropdownComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private channelsvc: ChannelService,
+    private channelsvc: ChannelService
   ) {}
 
   ngOnInit() {
@@ -29,13 +27,15 @@ export class DropdownComponent implements OnInit {
       this.channels = channelsvcData;
       this.entities = this.channels;
     });
-    this.entity = this.formBuilder.group({
-      entity: [null, Validators.required]
+  /*   this.entity = this.formBuilder.group({
+      entity: [null, [Validators.required]]
     });
-    this.entity.get("entity").setValue(this.defaultValue);
+    this.entity.get("entity").setValue(this.defaultValue); */
   }
 
-  outputEntity(event: any) {
+  outputEntity() {
     this.selectionChange.emit(this.entity.value.entity);
+    console.log(this.entity.value);
+    console.log(this.selectedValue);
   }
 }

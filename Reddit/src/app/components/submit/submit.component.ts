@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { ChannelService } from "src/app/services/channel.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
@@ -8,33 +8,28 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./submit.component.css"]
 })
 export class SubmitComponent implements OnInit {
-  form: FormGroup;
-  valid: boolean = true;
-  channel: string;
+ submitForm: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
   hasError(controlName: string, errorName: string) {
-    return this.form.controls[controlName].hasError(errorName);
-  }
-  outputEntity($event: any) {
-    this.channel = $event;
+    return this.submitForm.controls[controlName].hasError(errorName);
   }
 
   submitData() {
     let post = {
-      title: this.form.get("title").value,
-      content: this.form.get("content").value,
-      channel: this.channel
+      title: this.submitForm.get("title").value,
+      content: this.submitForm.get("content").value,
+      channel: this.submitForm.get("entity").value
     };
-    console.log(post);
   }
 
   ngOnInit() {
-    this.form = this.fb.group({
+    this.submitForm = this.fb.group({
       title: ["", [Validators.required]],
-      content: ["", [Validators.required, Validators.maxLength(10)]],  
-      channel: ['this.channel',  [Validators.required]]
+      content: ["", [Validators.required, Validators.maxLength(10)]],
+      entity: ["",[Validators.required]],
     });
+    this.submitForm.valueChanges.subscribe(newVal => console.log(newVal));
   }
 }
