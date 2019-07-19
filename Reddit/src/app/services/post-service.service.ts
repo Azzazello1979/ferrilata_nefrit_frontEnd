@@ -36,7 +36,6 @@ export class PostServiceService {
   }
 
   createPosts(post): any {
-    console.log(post);
     this.http.post(
       environment.postsUrl,
       post,

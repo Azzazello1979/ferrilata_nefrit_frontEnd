@@ -7,11 +7,10 @@
         <textarea type="text" matInput rows="10" cols="150" placeholder="Type your post here*" formControlName="content"></textarea>
         <mat-error *ngIf="hasError('content', 'required')">Content is required.</mat-error>
         <mat-error *ngIf="hasError('content', 'maxlength')">Content can't be longer than 255 characters.</mat-error>
-
     </mat-form-field>
-    <app-dropdown [entity]="submitForm">
+    <app-dropdown [entity]="submitForm" (selectionChange)="outputEntity($event)" [(selectedValue)]="channel">
     </app-dropdown>
-    <button type="button" mat-raised-button [disabled]="submitForm.invalid" (click)="submitData()"> 
+    <button type="button" mat-raised-button [disabled]="submitForm.invalid || isChannelSelected" (click)="submitData()"> 
          Submit
         </button>
 </form>

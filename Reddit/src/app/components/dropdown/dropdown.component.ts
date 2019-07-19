@@ -9,7 +9,7 @@ import { ChannelService } from "src/app/services/channel.service";
 })
 export class DropdownComponent implements OnInit {
   @Input() entity: FormGroup;
-  selectedValue: string;
+  @Input() selectedValue: string;
   channels: string[];
   @Input() entities: any;
   @Input() displayableProperty: string;
@@ -27,15 +27,13 @@ export class DropdownComponent implements OnInit {
       this.channels = channelsvcData;
       this.entities = this.channels;
     });
-  /*   this.entity = this.formBuilder.group({
+    this.entity = this.formBuilder.group({
       entity: [null, [Validators.required]]
     });
-    this.entity.get("entity").setValue(this.defaultValue); */
-  }
+    this.entity.get("entity").setValue(this.defaultValue);
+  } 
 
   outputEntity() {
     this.selectionChange.emit(this.entity.value.entity);
-    console.log(this.entity.value);
-    console.log(this.selectedValue);
   }
 }
