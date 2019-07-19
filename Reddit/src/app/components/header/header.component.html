@@ -2,7 +2,7 @@
     <a class="navbar-logo" routerLink="/">
         <img class="logo" src="/assets/duck-transparent-toy-2.png">
     </a>
-    <app-dropdown class="dropdown-item" (selectionChange)="outputEntity($event)"></app-dropdown>
+    <app-dropdown class="dropdown-item" (selectionChange)="selectedChannel($event)"></app-dropdown>
     <button *ngIf="isLoggedIn()" mat-raised-button (click)="logOut() " routerLink="/">  Welcome {{userName}} <br> Logout</button>
     <button *ngIf="!isLoggedIn()" mat-raised-button routerLink="/login"> Login</button>
 </nav>

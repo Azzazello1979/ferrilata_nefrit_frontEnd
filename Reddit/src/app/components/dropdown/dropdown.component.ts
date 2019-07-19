@@ -9,16 +9,18 @@ import { ChannelService } from "src/app/services/channel.service";
 })
 export class DropdownComponent implements OnInit {
   @Input() entity: FormGroup;
-  @Input() selectedValue: string;
   channels: string[];
+  placeholder: string = "Please select";
+  channel: string;
+
   @Input() entities: any;
   @Input() displayableProperty: string;
   @Input() defaultValue: string;
-  @Output() selectionChange = new EventEmitter();
+  @Output() selectionChange = new EventEmitter<string>();
 
   constructor(
     private formBuilder: FormBuilder,
-    private channelsvc: ChannelService
+    private channelsvc: ChannelService,
   ) {}
 
   ngOnInit() {
@@ -28,12 +30,14 @@ export class DropdownComponent implements OnInit {
       this.entities = this.channels;
     });
     this.entity = this.formBuilder.group({
-      entity: [null, [Validators.required]]
+      entity: [null, Validators.required]
     });
     this.entity.get("entity").setValue(this.defaultValue);
-  } 
+  }
 
-  outputEntity() {
-    this.selectionChange.emit(this.entity.value.entity);
+  selectedChannel($event) {
+    this.placeholder = "";
+    this.channel = this.entity.value.entity
+    this.selectionChange.emit(this.channel);
   }
 }

@@ -36,4 +36,9 @@ export class HeaderComponent implements OnInit {
     this.channel = $event;
     this.router.navigate([`/${this.channel}`]);
   }
+
+  selectedChannel($event: string) {
+    this.channel = $event;
+    this.router.navigate([`/${this.channel}`]);
+  }
 }

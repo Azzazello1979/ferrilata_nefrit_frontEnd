@@ -15,14 +15,8 @@ const routes: Routes = [
   {
     path: "submit",
     component: SubmitComponent
-    
     //canActivate: [AuthGuard]
   },
-  { path: 'submit/channelSelector', component:SubmitComponent},
-
-  { path: ":channel", component: PostsComponent},
-
-
   {
     path: "",
     component: PostsComponent
@@ -30,7 +24,8 @@ const routes: Routes = [
   {
     path: "register",
     component: RegisterComponent
-  }
+  },
+  { path: ":channel", component: PostsComponent }
 ];
 
 @NgModule({
