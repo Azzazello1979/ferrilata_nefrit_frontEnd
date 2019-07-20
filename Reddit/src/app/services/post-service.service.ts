@@ -40,6 +40,6 @@ export class PostServiceService {
       environment.postsUrl,
       post,
       this.httpOptions
-    ).subscribe((res)=>{console.log(res)});
+    ).subscribe();
   }
 }

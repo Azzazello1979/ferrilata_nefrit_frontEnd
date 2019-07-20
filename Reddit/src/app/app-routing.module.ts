@@ -15,7 +15,6 @@ const routes: Routes = [
   {
     path: "submit",
     component: SubmitComponent
-    //canActivate: [AuthGuard]
   },
   {
     path: "",
