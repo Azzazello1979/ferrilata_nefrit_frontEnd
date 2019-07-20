@@ -2,8 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { Observable, BehaviorSubject } from "rxjs";
-import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -15,11 +14,11 @@ export class ChannelService {
     })
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   getAllChannels() {
     const request = this.http.get(environment.channelUrl, this.httpOptions);
-    const channelObs = new Observable<any>(observer => {
+    new Observable<any>(observer => {
       observer.next(request);
     });
     return request;
@@ -27,7 +26,7 @@ export class ChannelService {
 
   getSelectedChannel(channel) {
     const request = this.http.get(environment.channelUrl + channel);
-    const selectedChannels = new Observable(observer => {
+    new Observable(observer => {
       observer.next(request);
     });
     return request;

@@ -8,15 +8,16 @@ import { environment } from "../../environments/environment";
   providedIn: "root"
 })
 export class PostServiceService {
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json"
+    })
+  };
+
   constructor(private http: HttpClient) {}
 
   getPosts(): any {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      })
-    };
-    const request = this.http.get(environment.postsUrl, httpOptions);
+    const request = this.http.get(environment.postsUrl, this.httpOptions);
     new Observable(observer => {
       observer.next(request);
     });
@@ -24,18 +25,21 @@ export class PostServiceService {
   }
 
   filterPosts(selectedChannel): any {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      })
-    };
     const request = this.http.get(
       environment.postsUrl + `${selectedChannel.channel}`,
-      httpOptions
+      this.httpOptions
     );
     new Observable(observer => {
       observer.next(request);
     });
     return request;
+  }
+
+  createPosts(post): any {
+    this.http.post(
+      environment.postsUrl,
+      post,
+      this.httpOptions
+    ).subscribe();
   }
 }

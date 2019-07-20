@@ -8,7 +8,7 @@ import { ChannelService } from "src/app/services/channel.service";
   styleUrls: ["./dropdown.component.css"]
 })
 export class DropdownComponent implements OnInit {
-  entity: FormGroup;
+  @Input() entity: FormGroup;
   channels: string[];
   placeholder: string = "Please select";
   channel: string;
@@ -35,7 +35,7 @@ export class DropdownComponent implements OnInit {
     this.entity.get("entity").setValue(this.defaultValue);
   }
 
-  selectedChannel() {
+  selectedChannel($event) {
     this.placeholder = "";
     this.channel = this.entity.value.entity
     this.selectionChange.emit(this.channel);

@@ -1,0 +1,11 @@
+.formo {
+    padding-top: 8%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+mat-form-field {
+    width: 25%;
+}
