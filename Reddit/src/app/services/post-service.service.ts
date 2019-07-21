@@ -3,12 +3,13 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostServiceService {
-  constructor(private http: HttpClient) {}  
+  constructor(private http: HttpClient) {}
 
   getPosts(): any {
     const httpOptions = {
@@ -21,5 +22,15 @@ export class PostServiceService {
       observer.next(request);
     });
     return request;
+  }
+
+  deletePost(id: any): Observable<{}> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    const url = `http://localhost:3000/posts/${id}`;
+    return this.http.delete(url, httpOptions);
   }
 }

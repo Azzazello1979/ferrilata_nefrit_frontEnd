@@ -20,7 +20,6 @@ export class PipeService implements PipeTransform {
   transform(actionTimeStamp: number): string { // actionTimeStamp: any user action, like click or submit/post
     this.timeNow = Date.now();
     this.elapsedTime = this.timeNow - actionTimeStamp;
-
     if (this.elapsedTime > this.year) {
       return (`${this.yearsAgo} years ago.`);
     } else if (this.elapsedTime < this.year && this.elapsedTime > this.month) {
