@@ -30,7 +30,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { SubmitComponent } from './components/submit/submit.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent,DummyDialogComponent, DropdownComponent, RegisterComponent, SubmitComponent],
+  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent, DummyDialogComponent, DropdownComponent, RegisterComponent, SubmitComponent, PipeService],
 
   imports: [
     BrowserModule,
@@ -46,7 +46,7 @@ import { SubmitComponent } from './components/submit/submit.component';
     MatCheckboxModule,
     MatCardModule,
     MatDividerModule,
-    MatListModule, 
+    MatListModule,
     MatDialogModule,
     HttpClientModule,
     MatSelectModule
