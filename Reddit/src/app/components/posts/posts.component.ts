@@ -46,9 +46,17 @@ export class PostsComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.refreshPosts();
       if (result) {
         console.log('Yes clicked');
       }
+    });
+    this.postservice.getPosts();
+  }
+
+  refreshPosts() {
+    this.postservice.getPosts().subscribe((result) => {
+      this.posts = result as Posts[];
     });
   }
   // deletePost(id) {
