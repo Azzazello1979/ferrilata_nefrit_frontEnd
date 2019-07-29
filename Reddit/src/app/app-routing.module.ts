@@ -17,17 +17,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  },
-  // {
-  //   resolve: {results: PostsComponent},
-  //   runGuardsAndResolvers: 'always'
-  // }
-
-  // ,{
-  //   path: '/submit',
-  //   component: SubmitComponent,
-  //   canActivate: [AuthGuard]
-  // }
+  }
 ];
 
 @NgModule({

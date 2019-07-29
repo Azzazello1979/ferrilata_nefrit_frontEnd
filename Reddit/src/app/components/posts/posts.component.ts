@@ -10,7 +10,6 @@ import { Button } from 'protractor';
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
-  // template: `<p>The hero's birthday is {{ timestamp | elapsedTime }}</p>`
 })
 export class PostsComponent implements OnInit {
   id: number;
@@ -47,9 +46,6 @@ export class PostsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.refreshPosts();
-      if (result) {
-        console.log('Yes clicked');
-      }
     });
     this.postservice.getPosts();
   }
@@ -59,11 +55,4 @@ export class PostsComponent implements OnInit {
       this.posts = result as Posts[];
     });
   }
-  // deletePost(id) {
-  //   console.log(this.posts);
-  //   console.log(id);
-  //   this.postservice.deletePost(id).subscribe(() => {
-  //     this.posts.filter(x => x.id !== id);
-  //   });
-  // }
 }

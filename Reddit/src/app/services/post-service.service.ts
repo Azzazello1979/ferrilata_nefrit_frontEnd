@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Posts } from '../posts.model';
+import { config } from '../config';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +31,6 @@ export class PostServiceService {
         'Content-Type': 'application/json'
       })
     };
-    const url = `http://localhost:3000/posts/${id}`;
-    return this.http.delete(url, httpOptions);
+    return this.http.delete(config.postsUrl + id, httpOptions);
   }
 }
