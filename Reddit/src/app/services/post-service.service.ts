@@ -42,4 +42,15 @@ export class PostServiceService {
       this.httpOptions
     ).subscribe();
   }
+
+  newPosts(): any {
+    const request = this.http.get(
+      environment.postsUrl,
+      this.httpOptions
+    );
+    new Observable(observer => {
+      observer.next(request);
+    });
+    return request;
+  }
 }

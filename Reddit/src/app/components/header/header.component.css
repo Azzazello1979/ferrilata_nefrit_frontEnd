@@ -16,3 +16,9 @@
     padding: 0px;
     margin-left: 10px;
 }
+
+.app-dropdown {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
