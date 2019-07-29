@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Button } from 'protractor';
+import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -24,14 +25,29 @@ export class PostsComponent implements OnInit {
   constructor(
     private postservice: PostServiceService,
     private authservice: AuthService,
-    public dialog: MatDialog
-    ) {}
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+  ) { }
 
-    ngOnInit() {
+  ngOnInit() {
+    this.postservice.getPosts().subscribe((postData: Posts[]) => {
+      this.posts = postData;
+    });
+    this.isLoggedIn = this.authservice.isLoggedIn();
+
+    this.route.params.subscribe((selectedChannel: Params) => {
+      if (Object.keys(selectedChannel).length === 0) {
       this.postservice.getPosts().subscribe((postData: Posts[]) => {
         this.posts = postData;
       });
-      this.isLoggedIn = this.authservice.isLoggedIn();
+    } else {
+      this.postservice
+        .filterPosts(selectedChannel)
+        .subscribe((postData: Posts[]) => {
+          this.posts = postData;
+        });
+      }
+    });
 
   }
 

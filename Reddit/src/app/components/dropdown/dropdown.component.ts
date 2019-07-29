@@ -1,31 +1,43 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
-import { MatSelectChange } from '@angular/material';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ChannelService } from "src/app/services/channel.service";
+
 @Component({
-  selector: 'app-dropdown',
-  templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.css']
+  selector: "app-dropdown",
+  templateUrl: "./dropdown.component.html",
+  styleUrls: ["./dropdown.component.css"]
 })
 export class DropdownComponent implements OnInit {
+  @Input() entity: FormGroup;
+  channels: string[];
+  placeholder: string = "Please select";
+  channel: string;
 
-  entity: FormGroup;
+  @Input() entities: any;
+  @Input() displayableProperty: string;
+  @Input() defaultValue: string;
+  @Output() selectionChange = new EventEmitter<string>();
 
-  @Input() private entities: any;
-  @Input() private displayableProperty: string;
-  @Input() private defaultValue: string;
-  @Output() selectionChange: EventEmitter<MatSelectChange> = new EventEmitter();
-  constructor(private formBuilder: FormBuilder) {
-
-    }
+  constructor(
+    private formBuilder: FormBuilder,
+    private channelsvc: ChannelService,
+  ) {}
 
   ngOnInit() {
-    this.entity = this.formBuilder.group({
-    entity: [null, Validators.required]
+    const receivedChannels = this.channelsvc.getAllChannels();
+    receivedChannels.subscribe((channelsvcData: any) => {
+      this.channels = channelsvcData;
+      this.entities = this.channels;
     });
-    this.entity.get('entity').setValue(this.defaultValue);
+    this.entity = this.formBuilder.group({
+      entity: [null, Validators.required]
+    });
+    this.entity.get("entity").setValue(this.defaultValue);
   }
-  
-  outputEntity(event: any) {
-    this.selectionChange.emit(event);
+
+  selectedChannel($event) {
+    this.placeholder = "";
+    this.channel = this.entity.value.entity
+    this.selectionChange.emit(this.channel);
   }
 }

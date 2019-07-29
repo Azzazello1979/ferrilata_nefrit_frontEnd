@@ -11,18 +11,24 @@ import { config } from '../config';
 })
 export class PostServiceService {
   constructor(private http: HttpClient) {}
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   getPosts(): Observable<Posts[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    const request = this.http.get<Posts[]>(environment.postsUrl, httpOptions);
+    const request = this.http.get<Posts[]>(environment.postsUrl, this.httpOptions);
     const postsObservables = new Observable(observer => {
-      observer.next(request);
     });
     return request;
+  }
+
+  filterPosts(selectedChannel): any {
+    const request = this.http.get(
+      environment.postsUrl + `${selectedChannel.channel}`,
+      this.httpOptions
+    );
   }
 
   deletePost(id: any): Observable<any> {
@@ -32,5 +38,12 @@ export class PostServiceService {
       })
     };
     return this.http.delete(config.postsUrl + id, httpOptions);
+  }
+  createPosts(post): any {
+    this.http.post(
+      environment.postsUrl,
+      post,
+      this.httpOptions
+    ).subscribe();
   }
 }

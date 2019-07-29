@@ -43,6 +43,12 @@ import { ConfirmationDialogComponent } from "./components/confirmation-dialog/co
     ConfirmationDialogComponent,
     PipeService
   ],
+} from '@angular/material';
+import { RegisterComponent } from './components/register/register.component';
+import { SubmitComponent } from './components/submit/submit.component';
+
+@NgModule({
+  declarations: [AppComponent, LoginComponent, PostsComponent, ErrorDialogComponent, DummyDialogComponent, HeaderComponent, DummyDialogComponent, DropdownComponent, RegisterComponent, SubmitComponent, PipeService],
 
   imports: [
     BrowserModule,

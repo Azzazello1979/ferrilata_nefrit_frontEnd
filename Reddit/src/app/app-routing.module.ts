@@ -4,11 +4,17 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { PostsComponent } from './components/posts/posts.component';
 import { RegisterComponent } from './components/register/register.component';
+import { SubmitComponent } from './components/submit/submit.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
+  },
+  {
+    path: 'submit',
+    component: SubmitComponent
   },
   {
     path: '',
@@ -17,11 +23,12 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  }
+  },
+  { path: ':channel', component: PostsComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
