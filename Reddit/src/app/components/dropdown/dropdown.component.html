@@ -1,8 +1,15 @@
 <div [formGroup]="entity">
+<<<<<<< HEAD
     <mat-form-field>0
         <mat-select (selectionChange)="selectedFreshPosts($event)" (selectionChange)="selectedChannel($event)" placeholder={{placeholder}} [formControlName]=" 'entity' ">
             <mat-option value=" ">Show all</mat-option>
             <mat-option *ngFor="let entity of entities" [(value)]="entity">
+=======
+    <mat-form-field>
+        <mat-select (selectionChange)="selectedChannel($event)" placeholder={{placeholder}} [formControlName]="'entity'">
+            <mat-option value="">All Channels</mat-option>
+            <mat-option *ngFor=" let entity of entities " [(value)]="entity ">
+>>>>>>> master
                 {{entity}}
             </mat-option>
         </mat-select>

@@ -27,13 +27,18 @@ export class HeaderComponent implements OnInit {
       err => console.log(err)
     );
   }
-
+  
   logOut() {
     this.authsvc.logout().subscribe();
   }
 
   isLoggedIn() {
     return this.authsvc.isLoggedIn();
+  }
+
+  outputEntity($event: any) {
+    this.channel = $event;
+    this.router.navigate([`/${this.channel}`]);
   }
 
   selectedChannel() {
