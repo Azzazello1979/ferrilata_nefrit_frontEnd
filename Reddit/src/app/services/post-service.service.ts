@@ -18,9 +18,11 @@ export class PostServiceService {
   };
 
   getPosts(): Observable<Posts[]> {
-    const request = this.http.get<Posts[]>(environment.postsUrl, this.httpOptions);
-    const postsObservables = new Observable(observer => {
-    });
+    const request = this.http.get<Posts[]>(
+      environment.postsUrl,
+      this.httpOptions
+    );
+    const postsObservables = new Observable(observer => {});
     return request;
   }
 
@@ -29,6 +31,7 @@ export class PostServiceService {
       environment.postsUrl + `${selectedChannel.channel}`,
       this.httpOptions
     );
+    return request;
   }
 
   deletePost(id: any): Observable<any> {
@@ -40,10 +43,6 @@ export class PostServiceService {
     return this.http.delete(config.postsUrl + id, httpOptions);
   }
   createPosts(post): any {
-    this.http.post(
-      environment.postsUrl,
-      post,
-      this.httpOptions
-    ).subscribe();
+    this.http.post(environment.postsUrl, post, this.httpOptions).subscribe();
   }
 }

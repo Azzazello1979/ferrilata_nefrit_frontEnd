@@ -48,7 +48,6 @@ export class PostsComponent implements OnInit {
         });
       }
     });
-
   }
 
   openDialog(postId): void {
