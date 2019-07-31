@@ -1,4 +1,4 @@
 export const config = {
-  apiUrl: 'http://localhost:3000',
-  postsUrl: 'http://localhost:3000/posts/'
+  apiUrl: 'http://localhost:3200',
+  postsUrl: 'http://localhost:3200/posts/'
 };

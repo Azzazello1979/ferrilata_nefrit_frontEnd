@@ -34,11 +34,11 @@ export class HeaderComponent implements OnInit {
 
   outputEntity($event: any) {
     this.channel = $event;
-    this.router.navigate([`/${this.channel}`]);
+    this.router.navigate([`/posts/${this.channel}`]);
   }
 
   selectedChannel($event: string) {
     this.channel = $event;
-    this.router.navigate([`/${this.channel}`]);
+    this.router.navigate([`/posts/${this.channel}`]);
   }
 }
