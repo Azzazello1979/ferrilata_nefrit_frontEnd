@@ -18,9 +18,9 @@
         <mat-list-item>
           <h3>{{ post.timestamp | elapsedTime }}</h3>
         </mat-list-item>
-        <mat-list-item>
+        <!-- <mat-list-item>
           <h3>{{ post.userId.username }}</h3>
-        </mat-list-item>
+        </mat-list-item> -->
         <mat-list-item *ngIf="isLoggedIn" (click)="openDialog(post._id)">
           <i class="material-icons">
             delete
