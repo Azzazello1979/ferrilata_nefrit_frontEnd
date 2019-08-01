@@ -24,7 +24,7 @@
                     <li>
                         <h3>{{ post.content }}</h3>
                     </li>
-                    <li class="delicon" *ngIf="isLoggedIn" (click)="openDialog(post._id)"> <i class="material-icons">
+                    <li class="delicon" *ngIf="isLoggedIn && jwtDecode() === post.userId.username" (click)="openDialog(post._id)"> <i class="material-icons">
                     delete
                   </i></li>
                 </div>

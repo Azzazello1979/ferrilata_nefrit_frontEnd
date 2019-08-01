@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Button } from 'protractor';
 import { ActivatedRoute, Params } from '@angular/router';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -22,6 +24,7 @@ export class PostsComponent implements OnInit {
   posts: Posts[] = [];
   isLoggedIn: boolean;
   postToDelete: any;
+  decodedUsername: string;
   constructor(
     private postservice: PostServiceService,
     private authservice: AuthService,
@@ -69,5 +72,16 @@ export class PostsComponent implements OnInit {
     this.postservice.getPosts().subscribe((result) => {
       this.posts = result as Posts[];
     });
+  }
+
+  jwtDecode() {
+    const helper = new JwtHelperService();
+    const myJwtToken = this.authservice.getJwtToken();
+    const decodedToken = helper.decodeToken(myJwtToken);
+    this.decodedUsername = decodedToken.username;
+    console.log(this.decodedUsername);
+    console.log(decodedToken);
+    console.log(this.userId);
+    return this.decodedUsername;
   }
 }
