@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { DialogService } from 'src/app/services/dialog.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   valid: boolean = true;
 
-  constructor(private fb: FormBuilder, private router: Router, private authsvc: AuthService) { }
+  constructor(private fb: FormBuilder, private router: Router, private authsvc: AuthService, private dialog: DialogService) { }
 
   hasError(controlName: string, errorName: string) {
     return this.form.controls[controlName].hasError(errorName);
@@ -27,9 +27,6 @@ export class RegisterComponent implements OnInit {
       res => {
         if (!res) {
           this.valid = false;
-          setTimeout(() => {
-            this.valid = true
-          }, 3000);
         } else {
           this.router.navigate(['']);
         }
@@ -40,5 +37,9 @@ export class RegisterComponent implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
+  }
+
+  openDialog() {
+    this.dialog.openError('Successful Registration', '');
   }
 }

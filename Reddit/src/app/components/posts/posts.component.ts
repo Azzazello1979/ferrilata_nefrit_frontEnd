@@ -79,9 +79,6 @@ export class PostsComponent implements OnInit {
     const myJwtToken = this.authservice.getJwtToken();
     const decodedToken = helper.decodeToken(myJwtToken);
     this.decodedUsername = decodedToken.username;
-    console.log(this.decodedUsername);
-    console.log(decodedToken);
-    console.log(this.userId);
     return this.decodedUsername;
   }
 }
