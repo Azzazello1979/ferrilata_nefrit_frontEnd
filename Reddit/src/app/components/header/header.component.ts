@@ -23,8 +23,9 @@ export class HeaderComponent implements OnInit {
       err => console.log(err)
     )
   }
-  
+
   logOut() {
+    window.location.reload();
     this.authsvc.logout().subscribe();
   }
 
@@ -41,4 +42,5 @@ export class HeaderComponent implements OnInit {
     this.channel = $event;
     this.router.navigate([`/${this.channel}`]);
   }
+
 }
