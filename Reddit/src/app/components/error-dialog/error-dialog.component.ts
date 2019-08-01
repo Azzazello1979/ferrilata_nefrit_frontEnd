@@ -16,7 +16,7 @@ export class ErrorDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ErrorDialogComponent>
   ) {
     dialogRef.disableClose = true;
-
+    console.log(data);
     this.errormsg = data.message;
     this.statuscode = data.status;
   }
