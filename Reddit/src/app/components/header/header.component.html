@@ -6,6 +6,10 @@
         <app-dropdown #channelSelector (click)="selectedChannel()"></app-dropdown>
         <app-dropdown #newPostSelector (click)="selectedFreshPosts()"></app-dropdown>
     </div>
-    <button *ngIf="isLoggedIn()" mat-raised-button (click)="logOut() " routerLink="/">  Welcome {{userName}} <br> Logout</button>
-    <button *ngIf="!isLoggedIn()" mat-raised-button routerLink="/login"> Login</button>
+    <div class="buttons">
+        <button *ngIf="isLoggedIn()" mat-raised-button (click)="logOut() " routerLink="/">  Welcome {{userName}} <br> Logout</button>
+        <button class="login" *ngIf="!isLoggedIn()" mat-raised-button routerLink="/login" routerLinkActive="active">Login</button>
+        <button class="signup" *ngIf="!isLoggedIn()" mat-raised-button routerLink="/register" routerLinkActive="active">Sign Up</button>
+        <button class="submit" *ngIf="isLoggedIn()" mat-raised-button routerLink="/submit" routerLinkActive="active">Submit a Post</button>
+    </div>
 </nav>
