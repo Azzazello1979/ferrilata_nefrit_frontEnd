@@ -1,30 +1,30 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { LoginComponent } from "./components/login/login.component";
-import { AuthGuard } from "./auth.guard";
-import { PostsComponent } from "./components/posts/posts.component";
-import { RegisterComponent } from "./components/register/register.component";
-import { SubmitComponent } from "./components/submit/submit.component";
-import { DropdownComponent } from "./components/dropdown/dropdown.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './auth.guard';
+import { PostsComponent } from './components/posts/posts.component';
+import { RegisterComponent } from './components/register/register.component';
+import { SubmitComponent } from './components/submit/submit.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 const routes: Routes = [
   {
-    path: "login",
+    path: 'login',
     component: LoginComponent
   },
   {
-    path: "submit",
+    path: 'submit',
     component: SubmitComponent
   },
   {
-    path: "",
+    path: '',
     component: PostsComponent
   },
   {
-    path: "register",
+    path: 'register',
     component: RegisterComponent
   },
-  { path: ":channel", component: PostsComponent }
+  { path: ':channel', component: PostsComponent }
 ];
 
 @NgModule({

@@ -26,7 +26,10 @@ export class AuthService {
     headers = headers.append('Content-Type', 'application/json');
     return this.http.post<any>(`${config.apiUrl}/register`, user, { headers })
       .pipe(
-        tap(res => { this.doLoginUser(user.username, res.tokens) }),
+        tap(res => {
+          const tokens = {jwt : res.token, refreshToken: res.refreshToken}
+          this.doLoginUser(user.username, tokens);
+        }),
         mapTo(true),
         catchError(error => {
           return of(false);

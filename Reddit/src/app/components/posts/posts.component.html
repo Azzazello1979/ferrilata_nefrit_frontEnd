@@ -1,25 +1,35 @@
 <h1>Posts</h1>
 <div class="main-container">
-  <div *ngIf="posts.length">
-    <div *ngFor="let post of posts; let i = index">
-      <mat-nav-list>
-        <mat-list-item>
-          <h2>Post: {{ i + 1 }}</h2>
-        </mat-list-item>
-        <mat-list-item>
-          <h3>{{ post.title }}</h3>
-        </mat-list-item>
-        <mat-list-item>
-          <h3>{{ post.content }}</h3>
-        </mat-list-item>
-        <mat-list-item>
-          <h3>{{ post.channel }}</h3>
-        </mat-list-item>
-        <mat-list-item>
-          <h3>{{ post.timestamp }}</h3>
-        </mat-list-item>
-      </mat-nav-list>
+    <div *ngIf="posts.length">
+        <div class="posts" *ngFor="let post of posts; let i = index">
+            <ul>
+                <div class="upperrow">
+                    <li>
+                        {{ i + 1 }}
+                    </li>
+                    <li>
+                        <h3>{{ post.channel }}</h3>
+                    </li>
+                    <li>
+                        <h3>Posted by: {{ post.userId.username }}</h3>
+                    </li>
+                    <li>
+                        <h3>{{ post.timestamp | elapsedTime }}</h3>
+                    </li>
+                </div>
+                <div>
+                    <li>
+                        <h3>{{ post.title }}</h3>
+                    </li>
+                    <li>
+                        <h3>{{ post.content }}</h3>
+                    </li>
+                    <li class="delicon" *ngIf="isLoggedIn && jwtDecode() === post.userId.username" (click)="openDialog(post._id)"> <i class="material-icons">
+                    delete
+                  </i></li>
+                </div>
+            </ul>
+        </div>
     </div>
-  </div>
-  <p *ngIf="!posts.length">There aren't any posts yet</p>
+    <p *ngIf="!posts.length">There aren't any posts yet</p>
 </div>

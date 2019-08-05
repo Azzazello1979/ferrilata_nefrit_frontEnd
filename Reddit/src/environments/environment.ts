@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  postsUrl: 'http://localhost:3200/',
-  channelUrl: 'http://localhost:3200/channels/'
+  postsUrl: 'http://localhost:3000/posts/',
+  channelUrl: 'http://localhost:3000/channels/'
 };
 
 /*

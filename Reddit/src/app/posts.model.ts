@@ -4,4 +4,5 @@ title: string;
 content: string;
 channel: string;
 timestamp: number;
+userId: string;
 }

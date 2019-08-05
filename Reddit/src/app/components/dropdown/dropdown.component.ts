@@ -39,7 +39,7 @@ export class DropdownComponent implements OnInit {
       this.channels = channelsvcData;
     });
 
-    const newPosts = this.postservice.newPosts();
+    const newPosts = this.postservice.getPosts();
     newPosts.subscribe((postData: any) => {
       this.newPosts = postData;
     });

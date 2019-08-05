@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         if (!res) {
           this.valid = false;
           setTimeout(() => {
-            this.valid = true
+            this.valid = true;
           }, 3000);
         } else {
           this.router.navigate(['']);
