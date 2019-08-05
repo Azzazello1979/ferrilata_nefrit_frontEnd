@@ -42,9 +42,9 @@ export class SubmitComponent implements OnInit {
     });
   }
 
-  outputEntity() {
+  selectedChannel() {
     this.channels.selectedChannel();
-    this.channels.selectionChange.emit();
+    this.channels.selectionChange.subscribe(channel=>{});
     this.isChannelSelected = false;
   }
 }

@@ -8,7 +8,7 @@
         <mat-error *ngIf="hasError('content', 'required')">Content is required.</mat-error>
         <mat-error *ngIf="hasError('content', 'maxlength')">Content can't be longer than 255 characters.</mat-error>
     </mat-form-field>
-    <app-dropdown #channels [entity]="submitForm" (click)="outputEntity()">
+    <app-dropdown #channels (click)="selectedChannel()">
     </app-dropdown>
     <button type="button" mat-raised-button [disabled]="submitForm.invalid || isChannelSelected" (click)="submitData()"> 
          Submit

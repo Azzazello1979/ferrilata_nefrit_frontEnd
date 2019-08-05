@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ChannelService } from "src/app/services/channel.service";
-import { Router } from "@angular/router";
 import { PostServiceService } from "src/app/services/post-service.service";
 
 @Component({
@@ -24,8 +23,7 @@ export class DropdownComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private channelsvc: ChannelService,
-    private postservice: PostServiceService,
-    private router: Router
+    private postservice: PostServiceService
   ) {}
 
   ngOnInit() {
@@ -50,9 +48,6 @@ export class DropdownComponent implements OnInit {
     this.entities = this.channels;
     this.channel = this.entity.value.entity;
     this.selectionChange.emit(this.channel);
-    if (this.channel !== undefined) {
-      this.router.navigate([`/${this.channel}`])
-    }
   }
 
   selectedFreshPosts() {
