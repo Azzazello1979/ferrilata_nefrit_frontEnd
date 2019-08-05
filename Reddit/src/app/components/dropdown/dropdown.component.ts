@@ -58,6 +58,5 @@ export class DropdownComponent implements OnInit {
   selectedFreshPosts() {
     this.entities = this.newPosts.map(post => post.title);
     this.selectionChange.emit(this.entity.value);
-    this.router.navigate(this.entity.value)
   }
 }

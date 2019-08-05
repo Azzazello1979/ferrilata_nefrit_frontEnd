@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PostServiceService } from "src/app/services/post-service.service";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
+import { DropdownComponent } from "../dropdown/dropdown.component";
 
 @Component({
   selector: "app-submit",
@@ -9,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ["./submit.component.css"]
 })
 export class SubmitComponent implements OnInit {
+  @ViewChild("channels", { static: false })
+  channels: DropdownComponent;
   submitForm: FormGroup;
   channel: FormGroup;
   isChannelSelected: boolean = true;
@@ -16,7 +19,7 @@ export class SubmitComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private postService: PostServiceService,
-    private router : Router,
+    private router: Router
   ) {}
   hasError(controlName: string, errorName: string) {
     return this.submitForm.controls[controlName].hasError(errorName);
@@ -29,7 +32,7 @@ export class SubmitComponent implements OnInit {
       channel: this.channel
     };
     this.postService.createPosts(post);
-    this.router.navigate(['/'])
+    this.router.navigate(["/"]);
   }
 
   ngOnInit() {
@@ -39,8 +42,9 @@ export class SubmitComponent implements OnInit {
     });
   }
 
-  outputEntity($event: any) {
-    this.channel = $event;
+  outputEntity() {
+    this.channels.selectedChannel();
+    this.channels.selectionChange.emit();
     this.isChannelSelected = false;
   }
 }
