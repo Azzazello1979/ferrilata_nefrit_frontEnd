@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ContentChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { DropdownComponent } from "../dropdown/dropdown.component";
+import { JwtHelperService } from "@auth0/angular-jwt";
+
 
 @Component({
   selector: "app-header",
@@ -25,12 +27,16 @@ export class HeaderComponent implements OnInit {
         this.userName = this.authsvc.loggedUser.value;
       },
       err => console.log(err)
-    );
+        )
+        const helper = new JwtHelperService();
+        const myJwtToken = this.authsvc.getJwtToken();
+        const decodedToken = helper.decodeToken(myJwtToken);
+        this.userName = decodedToken.username;
   }
 
   logOut() {
-    window.location.reload();
     this.authsvc.logout().subscribe();
+    window.location.reload();
   }
 
   isLoggedIn() {

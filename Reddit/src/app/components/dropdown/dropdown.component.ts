@@ -52,14 +52,12 @@ export class DropdownComponent implements OnInit {
     this.selectionChange.emit(this.channel);
     if (this.channel !== undefined) {
       this.router.navigate([`/${this.channel}`])
-      console.log('a');
     }
   }
 
   selectedFreshPosts() {
     this.entities = this.newPosts.map(post => post.title);
     this.selectionChange.emit(this.entity.value);
-    this.channel === undefined;
-    this.router.navigate([`/submit`])
+    this.router.navigate(this.entity.value)
   }
 }

@@ -69,3 +69,7 @@ button {
     text-decoration: blue;
     margin: 5px;
 }
+
+.app-dropdown {
+    display: flex;
+}
