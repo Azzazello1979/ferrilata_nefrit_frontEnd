@@ -1,12 +1,15 @@
 <nav class="navbar fixed-top">
     <div class="logoside">
         <a class="navbar-logo" routerLink="/">
-            <img class="logo" src="/assets/duck-transparent-toy-2.png">
+            <img class="logo" src="../../../assets/RedditStanding.png">
         </a>
         <app-dropdown class="dropdown-item" (selectionChange)="selectedChannel($event)"></app-dropdown>
     </div>
+    <div class="middle">
+        <h2 *ngIf="isLoggedIn()"> Welcome {{ userName }} </h2>
+    </div>
     <div class="buttons">
-        <button *ngIf="isLoggedIn()" mat-raised-button (click)="logOut() " routerLink="/">  Welcome {{userName}} <br> Logout</button>
+        <button class="logout" *ngIf="isLoggedIn()" mat-raised-button (click)="logOut() " routerLink="/"> Logout</button>
         <button class="login" *ngIf="!isLoggedIn()" mat-raised-button routerLink="/login" routerLinkActive="active">Login</button>
         <button class="signup" *ngIf="!isLoggedIn()" mat-raised-button routerLink="/register" routerLinkActive="active">Sign Up</button>
         <button class="submit" *ngIf="isLoggedIn()" mat-raised-button routerLink="/submit" routerLinkActive="active">Submit a Post</button>

@@ -13,8 +13,9 @@
     }
     
     h1 {
+        font-family: 'Raleway', sans-serif;
         text-align: center;
-        font-size: 18px;
+        font-size: 28px;
         text-shadow: 2px;
     }
     
