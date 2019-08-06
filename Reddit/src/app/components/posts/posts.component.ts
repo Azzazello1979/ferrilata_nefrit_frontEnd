@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Posts } from '../../posts.model';
 import { PostServiceService } from '../../services/post-service.service';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { Button } from 'protractor';
 import { ActivatedRoute, Params } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
@@ -20,9 +18,12 @@ export class PostsComponent implements OnInit {
   content: string;
   channel: string;
   timestamp: number;
+  isLoggedIn:boolean;
   userId: string;
+  score:Array<number>=[];
   posts: Posts[] = [];
-  isLoggedIn: boolean;
+  upVote:Array<any>;
+  downVote:Array<any>;
   postToDelete: any;
   decodedUsername: string;
   constructor(
@@ -38,17 +39,20 @@ export class PostsComponent implements OnInit {
     });
     this.isLoggedIn = this.authservice.isLoggedIn();
 
+    this.getScore()
+    console.log(this.score)
+
     this.route.params.subscribe((selectedChannel: Params) => {
       if (Object.keys(selectedChannel).length === 0) {
-      this.postservice.getPosts().subscribe((postData: Posts[]) => {
-        this.posts = postData;
-      });
-    } else {
-      this.postservice
-        .filterPosts(selectedChannel)
-        .subscribe((postData: Posts[]) => {
+        this.postservice.getPosts().subscribe((postData: Posts[]) => {
           this.posts = postData;
         });
+      } else {
+        this.postservice
+          .filterPosts(selectedChannel)
+          .subscribe((postData: Posts[]) => {
+            this.posts = postData;
+          });
       }
     });
   }
@@ -80,5 +84,16 @@ export class PostsComponent implements OnInit {
     const decodedToken = helper.decodeToken(myJwtToken);
     this.decodedUsername = decodedToken.username;
     return this.decodedUsername;
+  }
+  getScore(){
+    for (let i = 0; i < this.posts.length; i++) {
+      this.score.push(this.posts[i].upVote.length-this.posts[i].downVote.length);
+    }
+  }
+  upVoting(id) {
+    this.postservice.upVote(id).subscribe(res=>{})
+  }
+  downVoting(id) {
+    this.postservice.downVote(id).subscribe(res=>{})
   }
 }
