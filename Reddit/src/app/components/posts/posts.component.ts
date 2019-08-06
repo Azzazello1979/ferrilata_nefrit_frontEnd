@@ -18,12 +18,12 @@ export class PostsComponent implements OnInit {
   content: string;
   channel: string;
   timestamp: number;
-  isLoggedIn:boolean;
+  isLoggedIn: boolean;
   userId: string;
-  score:Array<number>=[];
+  score: Array<number> = [];
   posts: Posts[] = [];
-  upVote:Array<any>;
-  downVote:Array<any>;
+  upVote: Array<any>;
+  downVote: Array<any>;
   postToDelete: any;
   decodedUsername: string;
   constructor(
@@ -85,15 +85,15 @@ export class PostsComponent implements OnInit {
     this.decodedUsername = decodedToken.username;
     return this.decodedUsername;
   }
-  getScore(){
+  getScore() {
     for (let i = 0; i < this.posts.length; i++) {
-      this.score.push(this.posts[i].upVote.length-this.posts[i].downVote.length);
+      this.score.push(this.posts[i].upVote.length - this.posts[i].downVote.length);
     }
   }
   upVoting(id) {
-    this.postservice.upVote(id).subscribe(res=>{})
+    this.postservice.upVote(id).subscribe(res => { })
   }
   downVoting(id) {
-    this.postservice.downVote(id).subscribe(res=>{})
+    this.postservice.downVote(id).subscribe(res => { })
   }
 }
