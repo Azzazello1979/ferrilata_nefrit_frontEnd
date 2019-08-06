@@ -1,29 +1,14 @@
-<form action="POST" class="formo" [formGroup]="form">
-  <mat-form-field>
-    <input
-      type="text"
-      matInput
-      placeholder="Your Username*"
-      formControlName="username"
-      autocomplete="off"
-    />
-    <mat-error *ngIf="hasError('username', 'required')"
-      >Username is required.</mat-error
-    >
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      type="password"
-      matInput
-      placeholder="Your Password*"
-      formControlName="password"
-    />
-    <mat-error *ngIf="hasError('password', 'required')"
-      >Password is required.</mat-error
-    >
-  </mat-form-field>
-  <button type="button"  mat-raised-button [disabled]="form.invalid" (click)="submitData()"> 
+<form action="POST" class="formo" [formGroup]="form" (ngSubmit)="submitData()">
+    <mat-form-field>
+        <input type="text" matInput placeholder="Your Username*" formControlName="username" autocomplete="off" />
+        <mat-error *ngIf="hasError('username', 'required')">Username is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input type="password" matInput placeholder="Your Password*" formControlName="password" />
+        <mat-error *ngIf="hasError('password', 'required')">Password is required.</mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button [disabled]="form.invalid"> 
     Log In
   </button>
-  <mat-error *ngIf="this.valid==false">Wrong Username or Password.</mat-error>
+    <mat-error *ngIf="this.valid==false">Wrong Username or Password.</mat-error>
 </form>
