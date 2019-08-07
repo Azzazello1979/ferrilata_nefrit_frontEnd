@@ -25,8 +25,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    window.location.reload();
-    this.authsvc.logout().subscribe();
+    this.authsvc.logout().subscribe(res=>{
+      window.location.reload();
+    });
   }
 
   isLoggedIn() {

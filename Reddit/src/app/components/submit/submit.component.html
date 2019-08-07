@@ -1,16 +1,45 @@
-<form action="submit" class="formo" [formGroup]="submitForm">
-    <mat-form-field>
-        <input type="text" matInput placeholder="Title*" formControlName="title" autofocus/>
-        <mat-error *ngIf="hasError('title', 'required')">Title is required.</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <textarea type="text" matInput rows="10" cols="150" placeholder="Type your post here*" formControlName="content"></textarea>
-        <mat-error *ngIf="hasError('content', 'required')">Content is required.</mat-error>
-        <mat-error *ngIf="hasError('content', 'maxlength')">Content can't be longer than 255 characters.</mat-error>
-    </mat-form-field>
-    <app-dropdown [entity]="submitForm" (selectionChange)="outputEntity($event)">
-    </app-dropdown>
-    <button type="button" mat-raised-button [disabled]="submitForm.invalid || isChannelSelected" (click)="submitData()"> 
-         Submit
-        </button>
-</form>
+<div class="main">
+    <mat-tab-group>
+        <mat-tab label="Text">
+            <form action="submit" class="formo" [formGroup]="submitForm">
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Title*" formControlName="title" autofocus/>
+                    <mat-error *ngIf="hasError('title', 'required')">Title is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea type="text" matInput rows="10" cols="150" placeholder="Type your post here*" formControlName="content"></textarea>
+                    <mat-error *ngIf="hasError('content', 'required')">Content is required.</mat-error>
+                    <mat-error *ngIf="hasError('content', 'maxlength')">Content can't be longer than 255 characters.</mat-error>
+                </mat-form-field>
+                <app-dropdown [entity]="submitForm" (selectionChange)="outputEntity($event)">
+                </app-dropdown>
+                <button type="button" mat-raised-button [disabled]="submitForm.invalid || isChannelSelected" (click)="submitData()"> 
+                 Submit
+                </button>
+            </form>
+
+        </mat-tab>
+        <mat-tab label="Link">
+            <form action="submit" class="formo" [formGroup]="submitFormLink">
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Title*" formControlName="title" autofocus/>
+                    <mat-error *ngIf="hasLinkError('title', 'required')">Title is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea type="text" matInput rows="10" cols="150" placeholder="Type your post here*" formControlName="content"></textarea>
+                    <mat-error *ngIf="hasLinkError('content', 'required')">Content is required.</mat-error>
+                    <mat-error *ngIf="hasLinkError('content', 'maxlength')">Content can't be longer than 255 characters.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Link*" formControlName="url" autofocus/>
+                    <mat-error *ngIf="hasLinkError('url', 'required')">Link is required.</mat-error>
+                </mat-form-field>
+                <app-dropdown [entity]="submitFormLink" (selectionChange)="outputEntity($event)">
+                </app-dropdown>
+                <button type="button" mat-raised-button [disabled]="submitFormLink.invalid || isChannelSelected" (click)="submitLinkData()"> 
+                 Submit
+                </button>
+            </form>
+        </mat-tab>
+    </mat-tab-group>
+</div>
