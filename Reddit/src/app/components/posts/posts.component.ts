@@ -36,11 +36,10 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     this.postservice.getPosts().subscribe((postData: Posts[]) => {
       this.posts = postData;
+      this.getScore()
     });
     this.isLoggedIn = this.authservice.isLoggedIn();
 
-    this.getScore()
-    console.log(this.score)
 
     this.route.params.subscribe((selectedChannel: Params) => {
       if (Object.keys(selectedChannel).length === 0) {
@@ -87,13 +86,21 @@ export class PostsComponent implements OnInit {
   }
   getScore() {
     for (let i = 0; i < this.posts.length; i++) {
-      this.score.push(this.posts[i].upVote.length - this.posts[i].downVote.length);
+      // if (this.posts[i].upVotes.length < 1) {
+      //   this.score.push(this.posts[i].downVotes.length)
+      // } else if (this.posts[i].downVotes.length < 1) {
+      //   this.score.push(this.posts[i].upVotes.length)
+      // } else {
+      this.score.push(this.posts[i].upVotes.length - this.posts[i].downVotes.length);
+      // }
     }
   }
   upVoting(id) {
-    this.postservice.upVote(id).subscribe(res => { })
+    this.postservice.upVote(id).subscribe(res => {
+    })
   }
   downVoting(id) {
-    this.postservice.downVote(id).subscribe(res => { })
+    this.postservice.downVote(id).subscribe(res => {
+    })
   }
 }
