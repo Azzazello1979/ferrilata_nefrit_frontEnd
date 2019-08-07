@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ChannelService } from "src/app/services/channel.service";
 import { PostServiceService } from "src/app/services/post-service.service";
+import { PipeService } from "src/app/pipes/elapsedTimePipe";
 
 @Component({
   selector: "app-dropdown",
@@ -13,6 +14,7 @@ export class DropdownComponent implements OnInit {
   channels: string[];
   placeholder: string = "Please select";
   channel: string;
+  selection: string[] = ["Top", "New", "Last week's top"];
   newPosts: any[];
 
   @Input() entities: any;
@@ -23,7 +25,8 @@ export class DropdownComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private channelsvc: ChannelService,
-    private postservice: PostServiceService
+    private postservice: PostServiceService,
+    private pipe: PipeService
   ) {}
 
   ngOnInit() {
@@ -36,22 +39,16 @@ export class DropdownComponent implements OnInit {
     receivedChannels.subscribe((channelsvcData: any) => {
       this.channels = channelsvcData;
     });
-
     const newPosts = this.postservice.getPosts();
     newPosts.subscribe((postData: any) => {
       this.newPosts = postData;
     });
-    this.selectionChange.emit(this.entity.value);
+    this.selectionChange.emit(this.placeholder);
+
   }
 
-  selectedChannel() {
-    this.entities = this.channels;
-    this.channel = this.entity.value.entity;
-    this.selectionChange.emit(this.channel);
-  }
-
-  selectedFreshPosts() {
-    this.entities = this.newPosts.map(post => post.title);
-    this.selectionChange.emit(this.entity.value);
+  outputEntity($event: any) {
+    console.log($event.value);
+    this.selectionChange.emit($event.value);
   }
 }

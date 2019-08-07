@@ -3,8 +3,8 @@
         <img class="logo" src="/assets/duck-transparent-toy-2.png">
     </a>
     <div class="app-dropdown">
-        <app-dropdown #channelSelector (click)="selectedChannel()"></app-dropdown>
-        <app-dropdown #newPostSelector (click)="selectedFreshPosts()"></app-dropdown>
+        <app-dropdown #dropDownChannel [entities]=dropDownChannel.channels (selectionChange)=selectedChannel()></app-dropdown>
+        <app-dropdown #dropDownNewPosts [entities]=dropDownNewPosts.selection></app-dropdown>
     </div>
     <div class="buttons">
         <button *ngIf="isLoggedIn()" mat-raised-button (click)="logOut() " routerLink="/">  Welcome {{userName}} <br> Logout</button>

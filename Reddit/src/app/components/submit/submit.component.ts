@@ -10,8 +10,8 @@ import { DropdownComponent } from "../dropdown/dropdown.component";
   styleUrls: ["./submit.component.css"]
 })
 export class SubmitComponent implements OnInit {
-  @ViewChild("channels", { static: false })
-  channels: DropdownComponent;
+  @ViewChild("dropDownSelector", { static: false })
+  dropDownSelector: DropdownComponent;
   submitForm: FormGroup;
   channel: FormGroup;
   isChannelSelected: boolean = true;
@@ -43,8 +43,9 @@ export class SubmitComponent implements OnInit {
   }
 
   selectedChannel() {
-    this.channels.selectedChannel();
-    this.channels.selectionChange.subscribe(channel=>{});
+    this.dropDownSelector.selectionChange.subscribe(channel=>{this.channel = channel;
+    });
+    console.log(this.channel)
     this.isChannelSelected = false;
   }
 }

@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild} from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { DropdownComponent } from "../dropdown/dropdown.component";
@@ -13,13 +10,14 @@ import { JwtHelperService } from "@auth0/angular-jwt";
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild("channelSelector", { static: false })
-  channelSelector: DropdownComponent;
-  @ViewChild("newPostSelector", { static: false })
-  newPostSelector: DropdownComponent;
+  @ViewChild("dropDownChannel", { static: false })
+  dropDownChannel: DropdownComponent;
+  @ViewChild("dropDownNewPosts", { static: false })
+  dropDownNewPosts: DropdownComponent;
 
   userName: string;
   channel: string;
+  newPost: string;
 
   constructor(private authsvc: AuthService, private router: Router) {}
 
@@ -46,13 +44,12 @@ export class HeaderComponent implements OnInit {
   }
 
   selectedChannel() {
-    this.channelSelector.selectedChannel();
-    this.channelSelector.selectionChange.subscribe(selectedChannel => {
-      this.router.navigate([`/${selectedChannel}`]);
+    this.dropDownChannel.selectionChange.subscribe(channel => {
+      this.channel = channel;
+      console.log(this.channel);
+      if (this.channel !== undefined) {
+        this.router.navigate([`/${this.channel}`]);
+      }
     });
-  }
-
-  selectedFreshPosts() {
-    this.newPostSelector.selectedFreshPosts();
   }
 }
