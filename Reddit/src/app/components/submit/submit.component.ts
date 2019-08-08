@@ -42,10 +42,10 @@ export class SubmitComponent implements OnInit {
     });
   }
 
-  selectedChannel() {
+/*   selectedChannel() {
     this.dropDownSelector.selectionChange.subscribe(channel=>{this.channel = channel;
     });
     console.log(this.channel)
     this.isChannelSelected = false;
-  }
+  } */
 }

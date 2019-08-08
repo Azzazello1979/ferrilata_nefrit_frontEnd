@@ -51,7 +51,23 @@ export class PostsComponent implements OnInit {
         });
       }
     });
-  }
+
+    this.route.queryParams.subscribe((query: Params) => {
+      console.log('sdds', query.filter)
+      if (Object.keys(query).length !== 0) {
+      this.postservice.newPosts(query).subscribe((postData: Posts[]) => {
+        this.posts = this.posts.filter(post => post.timestamp).sort();
+        this.posts = postData;      });
+    } else {
+      this.postservice
+        .filterPosts(query)
+        .subscribe((postData: Posts[]) => {
+          this.posts = this.posts.filter(post => post.timestamp).sort();
+          this.posts = postData;
+        });
+      }
+    });
+      }
 
   openDialog(postId): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -70,6 +86,13 @@ export class PostsComponent implements OnInit {
 
   refreshPosts() {
     this.postservice.getPosts().subscribe((result) => {
+      this.posts = result as Posts[];
+    });
+  }
+
+  newestPosts() {
+    this.postservice.getPosts().subscribe((result) => {
+      this.posts.sort(post => post.timestamp);
       this.posts = result as Posts[];
     });
   }

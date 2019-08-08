@@ -1,12 +1,12 @@
 <nav class="navbar fixed-top">
     <div class="logoside">
-        <a class="navbar-logo" routerLink="/">
+        <a class="navbar-logo" (click)="reload()">
             <img class="logo" src="../../../assets/RedditStanding.png">
         </a>
     </div>
     <div class="app-dropdown">
-        <app-dropdown #dropDownChannel [entities]=dropDownChannel.channels (selectionChange)=selectedChannel()></app-dropdown>
-        <app-dropdown #dropDownNewPosts [entities]=dropDownNewPosts.selection></app-dropdown>
+        <app-dropdown #dropDownChannel [entities]=dropDownChannel.channels (click)=selectedChannel()></app-dropdown>
+        <app-dropdown #dropDownNewPosts [entities]=dropDownNewPosts.selection (click)=newPosts()></app-dropdown>
 
         <div class="middle">
             <h2 *ngIf="isLoggedIn()"> Welcome {{ userName }} </h2>

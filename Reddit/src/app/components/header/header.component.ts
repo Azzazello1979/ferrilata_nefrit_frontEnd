@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { DropdownComponent } from "../dropdown/dropdown.component";
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   dropDownNewPosts: DropdownComponent;
 
   userName: string;
-  channel: string;
+  public channel: string;
   newPost: string;
 
   constructor(private authsvc: AuthService, private router: Router) {}
@@ -45,11 +45,29 @@ export class HeaderComponent implements OnInit {
 
   selectedChannel() {
     this.dropDownChannel.selectionChange.subscribe(channel => {
-      this.channel = channel;
-      console.log(this.channel);
-      if (this.channel !== undefined) {
+      if (channel !== this.channel) {
+        this.channel = channel;
         this.router.navigate([`/${this.channel}`]);
+      } else {
+        this.channel = "";
       }
     });
+  }
+
+  reload() {
+    this.channel = "";
+    this.router.navigate([`/${this.channel}`]);
+  }
+  
+  newPosts() {
+    this.dropDownNewPosts.selectionChange.subscribe(selectedValue => {
+      console.log(selectedValue)
+      this.newPost = selectedValue;
+    });
+      if (this.channel == undefined) {
+        this.router.navigate(['/'],{ queryParams: { filter:`${this.newPost}`}});
+      } else {
+        this.router.navigate([`/${this.channel}/`],{ queryParams: { filter:`${this.newPost}`}});
+      }
   }
 }

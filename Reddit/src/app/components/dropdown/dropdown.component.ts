@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ChannelService } from "src/app/services/channel.service";
 import { PostServiceService } from "src/app/services/post-service.service";
-import { PipeService } from "src/app/pipes/elapsedTimePipe";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: "app-dropdown",
@@ -20,13 +20,12 @@ export class DropdownComponent implements OnInit {
   @Input() entities: any;
   @Input() displayableProperty: string;
   @Input() defaultValue: string;
-  @Output() selectionChange = new EventEmitter<string>();
+  public selectionChange = new BehaviorSubject<string>('');
 
   constructor(
     private formBuilder: FormBuilder,
     private channelsvc: ChannelService,
     private postservice: PostServiceService,
-    private pipe: PipeService
   ) {}
 
   ngOnInit() {
@@ -43,12 +42,14 @@ export class DropdownComponent implements OnInit {
     newPosts.subscribe((postData: any) => {
       this.newPosts = postData;
     });
-    this.selectionChange.emit(this.placeholder);
-
   }
 
   outputEntity($event: any) {
     console.log($event.value);
-    this.selectionChange.emit($event.value);
+    if ($event !== undefined) {
+     this.selectionChange.next($event.value);
+    } else{
+      this.selectionChange.next('');
+    }
   }
 }
