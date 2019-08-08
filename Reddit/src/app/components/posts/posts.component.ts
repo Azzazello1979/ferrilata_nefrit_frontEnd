@@ -20,7 +20,6 @@ export class PostsComponent implements OnInit {
   timestamp: number;
   isLoggedIn: boolean;
   userId: string;
-  score: Array<number> = [];
   posts: Posts[] = [];
   upVote: Array<any>;
   downVote: Array<any>;
@@ -36,8 +35,8 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     this.postservice.getPosts().subscribe((postData: Posts[]) => {
       this.posts = postData;
-      this.getScore()
     });
+
     this.isLoggedIn = this.authservice.isLoggedIn();
 
 
@@ -84,23 +83,18 @@ export class PostsComponent implements OnInit {
     this.decodedUsername = decodedToken.username;
     return this.decodedUsername;
   }
-  getScore() {
-    for (let i = 0; i < this.posts.length; i++) {
-      // if (this.posts[i].upVotes.length < 1) {
-      //   this.score.push(this.posts[i].downVotes.length)
-      // } else if (this.posts[i].downVotes.length < 1) {
-      //   this.score.push(this.posts[i].upVotes.length)
-      // } else {
-      this.score.push(this.posts[i].upVotes.length - this.posts[i].downVotes.length);
-      // }
-    }
-  }
   upVoting(id) {
     this.postservice.upVote(id).subscribe(res => {
+      this.postservice.getPosts().subscribe((postData: Posts[]) => {
+        this.posts = postData;
+      })
     })
   }
   downVoting(id) {
     this.postservice.downVote(id).subscribe(res => {
+      this.postservice.getPosts().subscribe((postData: Posts[]) => {
+        this.posts = postData;
+      })
     })
   }
 }

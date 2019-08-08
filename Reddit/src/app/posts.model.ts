@@ -6,5 +6,5 @@ export class Posts {
     timestamp: number;
     userId: string;
     upVotes: Array<any>;
-    downVotes: Array<any>
+    downVotes: Array<any>;
 }
