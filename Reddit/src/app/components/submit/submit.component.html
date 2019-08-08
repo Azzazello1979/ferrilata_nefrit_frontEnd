@@ -1,5 +1,5 @@
 <div class="main">
-    <mat-tab-group>
+    <mat-tab-group mat-align-tabs="center" animationDuration="500ms">
         <mat-tab label="Text">
             <form action="submit" class="formo" [formGroup]="submitForm">
                 <mat-form-field>
@@ -17,8 +17,8 @@
                  Submit
                 </button>
             </form>
-
         </mat-tab>
+
         <mat-tab label="Link">
             <form action="submit" class="formo" [formGroup]="submitFormLink">
                 <mat-form-field>

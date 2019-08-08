@@ -13,7 +13,7 @@ export class SubmitComponent implements OnInit {
   submitForm: FormGroup;
   submitFormLink: FormGroup;
   channel: FormGroup;
-  myreg = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g;
+  myreg = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?/g;
   isChannelSelected: boolean = true;
 
   constructor(
@@ -47,9 +47,8 @@ export class SubmitComponent implements OnInit {
     }
     this.postService.createPosts(postLink);
     this.router.navigate(['/']);
-
   }
-
+  
   ngOnInit() {
     this.submitForm = this.fb.group({
       title: ["", [Validators.required]],
@@ -60,8 +59,6 @@ export class SubmitComponent implements OnInit {
       content: ["", [Validators.required, Validators.maxLength(255)]],
       url: ['', [Validators.required, Validators.pattern(this.myreg)]]
     });
-
-
   }
 
   outputEntity($event: any) {

@@ -83,4 +83,5 @@ h2 {
     color: #ffffff;
     font-family: 'Raleway', sans-serif;
     justify-content: flex-start;
+    text-shadow: 4px 3px 2px rgb(7, 6, 6);
 }

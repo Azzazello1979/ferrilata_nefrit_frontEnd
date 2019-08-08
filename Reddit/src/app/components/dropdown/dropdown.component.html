@@ -1,8 +1,8 @@
 <div [formGroup]="entity">
-    <mat-form-field>
+    <mat-form-field [ngStyle]="{'font-weight':600}">
         <mat-select (selectionChange)="selectedChannel($event)" placeholder={{placeholder}} [formControlName]="'entity'">
-            <mat-option value="">All Channels</mat-option>
-            <mat-option *ngFor=" let entity of entities " [(value)]="entity ">
+            <mat-option [ngStyle]="{'font-weight':600, 'color': red}" value="">All Channels</mat-option>
+            <mat-option [ngStyle]="{'font-weight': 600}" *ngFor=" let entity of entities " [(value)]="entity ">
                 {{entity}}
             </mat-option>
         </mat-select>

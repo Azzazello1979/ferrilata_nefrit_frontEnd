@@ -5,6 +5,7 @@
         background-color: #DAE0E6;
         padding: 20px;
         border-radius: 3px;
+        position: relative;
     }
     
     .posts {
@@ -16,22 +17,26 @@
         font-family: 'Raleway', sans-serif;
         text-align: center;
         font-size: 28px;
-        text-shadow: 2px;
     }
     
     ul {
         grid-auto-rows: auto;
         border: 1px solid lightgreen;
         border-radius: 3px;
-        height: 160px;
+        height: 10em;
         list-style-type: none;
         font-family: 'Raleway', sans-serif;
-        font-size: 24px;
+        /* font-size: 24px; */
+        font-style: light;
     }
     
     li {
         display: flex;
         padding: 5px;
+    }
+    
+    a {
+        text-decoration: none;
     }
     
     .upperrow {
@@ -40,6 +45,11 @@
         padding: 5px;
         margin-bottom: 8px;
         font-size: 10px;
+    }
+    
+    .bottomrow {
+        /* padding-top: 0.5rem; */
+        padding-left: 1.25rem;
     }
     
     mat-nav-list {
@@ -55,4 +65,5 @@
         float: right;
         color: red;
         position: relative;
+        bottom: 2.5em;
     }
