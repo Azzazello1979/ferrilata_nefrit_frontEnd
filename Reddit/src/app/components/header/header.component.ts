@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-header',

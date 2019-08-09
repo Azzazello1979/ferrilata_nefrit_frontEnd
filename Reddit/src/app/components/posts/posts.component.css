@@ -60,3 +60,12 @@ mat-nav-list {
   width: 100px;
   height: 100px;
 }
+/* .buttons {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  justify-content: flex-end;
+}
+.button{
+  width: 100px;
+} */
