@@ -6,7 +6,7 @@
     </div>
     <div class="app-dropdown">
         <app-dropdown #dropDownChannel [entities]=dropDownChannel.channels (click)=selectedChannel()></app-dropdown>
-        <app-dropdown #dropDownNewPosts [entities]=dropDownNewPosts.selection (click)=newPosts()></app-dropdown>
+        <app-dropdown #dropDownNewPosts [entities]=dropDownNewPosts.selection (click)=filterPosts()></app-dropdown>
 
         <div class="middle">
             <h2 *ngIf="isLoggedIn()"> Welcome {{ userName }} </h2>

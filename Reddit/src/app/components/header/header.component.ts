@@ -59,11 +59,10 @@ export class HeaderComponent implements OnInit {
   }
 
   reload() {
-    this.channel = "";
-    this.router.navigate([`/${this.channel}`]);
+    this.router.navigate([`/`]);
   }
 
-  newPosts() {
+  filterPosts() {
     this.dropDownNewPosts.selectionChange.subscribe(selectedValue => {
       this.filter = selectedValue;
       if (this.filter) {
