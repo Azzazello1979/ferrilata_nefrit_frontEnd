@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Posts } from '../../posts.model';
-import { PostServiceService } from '../../services/post-service.service';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
-import { MatDialog } from '@angular/material';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { Button } from 'protractor';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Posts } from "../../posts.model";
+import { PostServiceService } from "../../services/post-service.service";
+import { Observable } from "rxjs";
+import { AuthService } from "src/app/services/auth.service";
+import { MatDialog } from "@angular/material";
+import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
+import { Button } from "protractor";
+import { ActivatedRoute, Params } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
+  selector: "app-posts",
+  templateUrl: "./posts.component.html",
+  styleUrls: ["./posts.component.css"]
 })
 export class PostsComponent implements OnInit {
   id: number;
@@ -30,7 +30,7 @@ export class PostsComponent implements OnInit {
     private authservice: AuthService,
     public dialog: MatDialog,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.postservice.getPosts().subscribe((postData: Posts[]) => {
@@ -40,42 +40,65 @@ export class PostsComponent implements OnInit {
 
     this.route.params.subscribe((selectedChannel: Params) => {
       if (Object.keys(selectedChannel).length === 0) {
-      this.postservice.getPosts().subscribe((postData: Posts[]) => {
-        this.posts = postData;
-      });
-    } else {
-      this.postservice
-        .filterPosts(selectedChannel)
-        .subscribe((postData: Posts[]) => {
+        this.postservice.getPosts().subscribe((postData: Posts[]) => {
           this.posts = postData;
         });
+      } else {
+        this.postservice
+          .filterPosts(selectedChannel)
+          .subscribe((postData: Posts[]) => {
+            this.posts = postData;
+          });
       }
     });
 
     this.route.queryParams.subscribe((query: Params) => {
-      console.log('sdds', query.filter)
-      if (Object.keys(query).length !== 0) {
-      this.postservice.newPosts(query).subscribe((postData: Posts[]) => {
-        this.posts = this.posts.filter(post => post.timestamp).sort();
-        this.posts = postData;      });
-    } else {
-      this.postservice
-        .filterPosts(query)
-        .subscribe((postData: Posts[]) => {
-          this.posts = this.posts.filter(post => post.timestamp).sort();
+      if (query.filter) {
+        this.postservice.newPosts(query).subscribe((postData: Posts[]) => {
           this.posts = postData;
+          console.log(
+            postData.map(post => post.timestamp).sort((a, b) => a - b)
+          );
+          console.log(
+            postData.map(post => post.timestamp).sort((a, b) => b - a)
+          );
+          console.log(
+            this.posts.map(post => post.timestamp).sort((a, b) => a - b)
+          );
+          console.log(
+            this.posts.map(post => post.timestamp).sort((a, b) => b - a)
+          );
+          this.posts
+            .map(post => post.timestamp)
+            .sort((a, b) => {
+              return b - a;
+            });
+          this.posts = this.posts.filter(post => post.timestamp).sort();
+
+          console.log(this.posts);
+        });
+      } else {
+        this.postservice.filterPosts(query).subscribe((postData: Posts[]) => {
+          console.log("s");
+
+          this.posts = postData;
+          this.posts
+            .map(post => post.timestamp)
+            .sort((a, b) => {
+              return b - a;
+            });
         });
       }
     });
-      }
+  }
 
   openDialog(postId): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
-        message: 'Are you sure you want to delete this post?',
-        buttonLeft: 'Yes',
-        buttonRight: 'Cancel',
-        postId,
+        message: "Are you sure you want to delete this post?",
+        buttonLeft: "Yes",
+        buttonRight: "Cancel",
+        postId
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -85,13 +108,13 @@ export class PostsComponent implements OnInit {
   }
 
   refreshPosts() {
-    this.postservice.getPosts().subscribe((result) => {
+    this.postservice.getPosts().subscribe(result => {
       this.posts = result as Posts[];
     });
   }
 
   newestPosts() {
-    this.postservice.getPosts().subscribe((result) => {
+    this.postservice.getPosts().subscribe(result => {
       this.posts.sort(post => post.timestamp);
       this.posts = result as Posts[];
     });

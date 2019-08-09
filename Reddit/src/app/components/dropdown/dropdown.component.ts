@@ -48,8 +48,6 @@ export class DropdownComponent implements OnInit {
     console.log($event.value);
     if ($event !== undefined) {
      this.selectionChange.next($event.value);
-    } else{
-      this.selectionChange.next('');
-    }
+    } 
   }
 }

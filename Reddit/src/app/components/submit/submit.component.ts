@@ -13,7 +13,7 @@ export class SubmitComponent implements OnInit {
   @ViewChild("dropDownSelector", { static: false })
   dropDownSelector: DropdownComponent;
   submitForm: FormGroup;
-  channel: FormGroup;
+  channel: string;
   isChannelSelected: boolean = true;
 
   constructor(
@@ -42,10 +42,9 @@ export class SubmitComponent implements OnInit {
     });
   }
 
-/*   selectedChannel() {
+  selectedChannel() {
     this.dropDownSelector.selectionChange.subscribe(channel=>{this.channel = channel;
     });
-    console.log(this.channel)
     this.isChannelSelected = false;
-  } */
+  }
 }

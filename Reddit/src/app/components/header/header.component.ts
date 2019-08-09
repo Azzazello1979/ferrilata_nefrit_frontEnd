@@ -16,8 +16,8 @@ export class HeaderComponent implements OnInit {
   dropDownNewPosts: DropdownComponent;
 
   userName: string;
-  public channel: string;
-  newPost: string;
+  channel: string;
+  filter: string;
 
   constructor(private authsvc: AuthService, private router: Router) {}
 
@@ -47,9 +47,13 @@ export class HeaderComponent implements OnInit {
     this.dropDownChannel.selectionChange.subscribe(channel => {
       if (channel !== this.channel) {
         this.channel = channel;
-        this.router.navigate([`/${this.channel}`]);
-      } else {
-        this.channel = "";
+        if (this.filter !== undefined){
+          this.router.navigate([`/${this.channel}`], {
+            queryParams: { filter: `${this.filter}` }
+          });
+        } else{
+          this.router.navigate([`/${this.channel}`])
+        }
       }
     });
   }
@@ -58,16 +62,21 @@ export class HeaderComponent implements OnInit {
     this.channel = "";
     this.router.navigate([`/${this.channel}`]);
   }
-  
+
   newPosts() {
     this.dropDownNewPosts.selectionChange.subscribe(selectedValue => {
-      console.log(selectedValue)
-      this.newPost = selectedValue;
-    });
-      if (this.channel == undefined) {
-        this.router.navigate(['/'],{ queryParams: { filter:`${this.newPost}`}});
-      } else {
-        this.router.navigate([`/${this.channel}/`],{ queryParams: { filter:`${this.newPost}`}});
+      this.filter = selectedValue;
+      if (this.filter) {
+        if (!this.channel) {
+          return this.router.navigate(["/"], {
+            queryParams: { filter: `${this.filter}` }
+          });
+        } else {
+          return this.router.navigate([`/${this.channel}/`], {
+            queryParams: { filter: `${this.filter}` }
+          });
+        }
       }
+    });
   }
 }

@@ -46,12 +46,11 @@ export class PostServiceService {
     this.http.post(environment.postsUrl, post, this.httpOptions).subscribe();
   }
 
-  newPosts(query): any {
-    console.log('swewe', query)
+  newPosts(newestPosts): any {
     const request = this.http.get(
-      environment.postsUrl + `${query}`,
+      environment.postsUrl + `?filter=${newestPosts.filter}`,
       this.httpOptions
-    );
+    )
     new Observable(observer => {
       observer.next(request);
     });
