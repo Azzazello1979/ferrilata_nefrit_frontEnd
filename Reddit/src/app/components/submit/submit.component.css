@@ -9,3 +9,7 @@
 mat-form-field {
     width: 25%;
 }
+
+mat-tab-group {
+    display: flex;
+}
