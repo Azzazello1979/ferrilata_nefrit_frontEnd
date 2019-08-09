@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -22,14 +22,16 @@ export class HeaderComponent implements OnInit {
       },
       err => console.log(err)
     );
-    const helper = new JwtHelperService();
-    const myJwtToken = this.authsvc.getJwtToken();
-    const decodedToken = helper.decodeToken(myJwtToken);
-    this.userName = decodedToken.username;
+    if (this.isLoggedIn()) {
+      const helper = new JwtHelperService();
+      const myJwtToken = this.authsvc.getJwtToken();
+      const decodedToken = helper.decodeToken(myJwtToken);
+      this.userName = decodedToken.username;
+    }
   }
 
   logOut() {
-    this.authsvc.logout().subscribe(res=>{
+    this.authsvc.logout().subscribe(res => {
       window.location.reload();
     });
   }

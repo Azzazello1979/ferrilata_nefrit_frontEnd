@@ -1,73 +1,73 @@
-    .main-container {
-        display: flex;
-        justify-content: center;
-        align-content: flex-start;
-        background-color: #DAE0E6;
-        padding: 20px;
-        border-radius: 3px;
-        position: relative;
-    }
-    
-    .posts {
-        margin: 10px;
-        background-color: white;
-    }
-    
-    h1 {
-        font-family: 'Raleway', sans-serif;
-        text-align: center;
-        font-size: 28px;
-    }
-    
-    ul {
-        grid-auto-rows: auto;
-        border: 1px solid lightgreen;
-        border-radius: 3px;
-        height: 10em;
-        list-style-type: none;
-        font-family: 'Raleway', sans-serif;
-        font-style: light;
-    }
-    
-    li {
-        display: flex;
-        padding: 5px;
-    }
-    
-    a {
-        text-decoration: none;
-    }
-    
-    a:hover {
-        color: orangered;
-    }
-    
-    .upperrow {
-        display: flex;
-        justify-content: flex-start;
-        padding: 5px;
-        margin-bottom: 8px;
-        font-size: 10px;
-        padding-right: 1.25rem;
-    }
-    
-    .bottomrow {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-    }
-    
-    mat-nav-list {
-        display: flex;
-        justify-content: center;
-        border: 1px solid black;
-        border-radius: 3px;
-        height: 140px;
-    }
-    
-    .delicon {
-        cursor: pointer;
-        float: right;
-        color: red;
-        position: relative;
-        bottom: 2.5em;
-    }
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  background-color: #dae0e6;
+  padding: 20px;
+  border-radius: 3px;
+  position: relative;
+}
+.posts {
+  margin: 10px;
+  background-color: white;
+}
+h1 {
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+  font-size: 28px;
+}
+ul {
+  grid-auto-rows: auto;
+  border: 1px solid lightgreen;
+  border-radius: 3px;
+  height: 10em;
+  list-style-type: none;
+  font-family: "Raleway", sans-serif;
+  font-style: light;
+}
+li {
+  display: flex;
+  padding: 5px;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: orangered;
+}
+.upperrow {
+  display: flex;
+  justify-content: flex-start;
+  padding: 5px;
+  margin-bottom: 8px;
+  font-size: 10px;
+  padding-right: 1.25rem;
+}
+.bottomrow {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+mat-nav-list {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 3px;
+  height: 140px;
+}
+.delicon {
+  cursor: pointer;
+  float: right;
+  color: red;
+  position: relative;
+  bottom: 2.5em;
+}
+.voting {
+  position: relative;
+  float: right;
+  bottom:140px;
+  /* sima bottom 80px */
+  right: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PostServiceService } from "src/app/services/post-service.service";
 import { Router } from '@angular/router';
-import { url } from 'inspector';
 
 @Component({
   selector: "app-submit",

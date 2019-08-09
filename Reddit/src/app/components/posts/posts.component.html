@@ -1,66 +1,28 @@
 <h1>Posts</h1>
 <div class="main-container">
-    <div *ngIf="posts.length">
-        <div class="posts" *ngFor="let post of posts; let i = index">
-            <ul>
-                <div class="upperrow">
-                    <li>
-                        {{ i + 1 }}
-                    </li>
-                    <li>
-                        <h3 class="channel">{{ post.channel }}</h3>
-                    </li>
-                    <li>
-                        <h3>Posted by: {{ post.userId.username }}</h3>
-                    </li>
-                    <li>
-                        <h3>{{ post.timestamp | elapsedTime }}</h3>
-                    </li>
-                </div>
-                <div class="bottomrow">
-                    <li>
-                        <h3 class="title">{{ post.title }}</h3>
-                    </li>
-                    <li>
-                        <h3>{{ post.content }}</h3>
-                    </li>
-                    <li *ngIf="post.url">
-                        <a target="_blank" [href]="post.url">{{ post.url }}</a>
-                    </li>
-
-                </div>
-            </ul>
-            <span class="bottom-right">
-                <li class="delicon" *ngIf="isLoggedIn && jwtDecode() === post.userId.username" (click)="openDialog(post._id)"> <i class="material-icons">
-                  delete
-                </i></li>
-              </span>
-
-          <div class="buttons">
-            <button
-              class="button"
-              type="button"
-              mat-raised-button
-              (click)="upVoting(post._id)"
-              [disabled]="!isLoggedIn"
-            >
-              Upvote
-            </button>
+  <div *ngIf="posts.length">
+    <div class="posts" *ngFor="let post of posts; let i = index">
+      <ul>
+        <div class="upperrow">
+            <li>{{ i + 1 }}</li>
+            <li><h3 class="channel">{{ post.channel }}</h3></li>
+            <li><h3>Posted by: {{ post.userId.username }}</h3></li>
+            <li><h3>{{ post.timestamp | elapsedTime }}</h3></li>
+        </div>
+        <div class="bottomrow">
+            <li><h3 class="title">{{ post.title }}</h3></li>
+            <li><h3>{{ post.content }}</h3></li>
+            <li *ngIf="post.url"><a target="_blank" [href]="post.url">{{ post.url }}</a></li>
+        </div>
+        <span class="bottom-right"><li class="delicon" *ngIf="isLoggedIn && jwtDecode() === post.userId.username" (click)="openDialog(post._id)"> <i class="material-icons">delete</i></li></span>
+      </ul>
+          <div class="voting">
+            <button class="button" type="button" (click)="upVoting(post._id)" mat-raised-button [disabled]="!isLoggedIn"><i class="material-icons">expand_less</i></button>
             <p>{{ post.upVotes.length }}</p>
             <p>{{ post.downVotes.length }}</p>
-            <button
-              class="button"
-              type="button"
-              mat-raised-button
-              (click)="downVoting(post._id)"
-              [disabled]="!isLoggedIn"
-            >
-              Downvote
-            </button>
+            <button class="button" type="button" (click)="downVoting(post._id)" mat-raised-button [disabled]="!isLoggedIn"><i class="material-icons">expand_more</i></button>
           </div>
-        </div>
-      </ul>
     </div>
   </div>
-  <p *ngIf="!posts.length">There aren't any posts yet</p>
 </div>
+<p *ngIf="!posts.length">There aren't any posts yet</p>
