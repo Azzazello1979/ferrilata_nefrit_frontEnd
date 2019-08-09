@@ -29,17 +29,17 @@ export class SubmitComponent implements OnInit {
   }
 
   submitData() {
-    let post = {
-      title: this.submitForm.get("title").value,
-      content: this.submitForm.get("content").value,
+    const post = {
+      title: this.submitForm.get('title').value,
+      content: this.submitForm.get('content').value,
       channel: this.channel
     };
     this.postService.createPosts(post);
     this.router.navigate(['/']);
   }
   submitLinkData() {
-    let postLink = {
-      title: this.submitFormLink.get("title").value,
+    const postLink = {
+      title: this.submitFormLink.get('title').value,
       url: this.submitFormLink.get('url').value,
       channel: this.channel,
       type: 'link',
@@ -48,15 +48,15 @@ export class SubmitComponent implements OnInit {
     this.postService.createPosts(postLink);
     this.router.navigate(['/']);
   }
-  
+
   ngOnInit() {
     this.submitForm = this.fb.group({
-      title: ["", [Validators.required]],
-      content: ["", [Validators.required, Validators.maxLength(255)]],
+      title: ['', [Validators.required]],
+      content: ['', [Validators.required, Validators.maxLength(255)]],
     });
     this.submitFormLink = this.fb.group({
-      title: ["", [Validators.required]],
-      content: ["", [Validators.required, Validators.maxLength(255)]],
+      title: ['', [Validators.required]],
+      content: ['', [Validators.required, Validators.maxLength(255)]],
       url: ['', [Validators.required, Validators.pattern(this.myreg)]]
     });
   }

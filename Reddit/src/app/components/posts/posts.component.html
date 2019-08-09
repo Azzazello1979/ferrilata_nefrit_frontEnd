@@ -19,12 +19,12 @@
                 </div>
                 <div class="bottomrow">
                     <li>
-                        <h3>{{ post.title }}</h3>
+                        <h3 class="title">{{ post.title }}</h3>
                     </li>
                     <li>
                         <h3>{{ post.content }}</h3>
                     </li>
-                    <li>
+                    <li *ngIf="post.url">
                         <a target="_blank" [href]="post.url">{{ post.url }}</a>
                     </li>
 
