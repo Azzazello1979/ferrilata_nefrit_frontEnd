@@ -1,0 +1,27 @@
+.mat-select-value {
+    color: white;
+}
+
+:host /deep/ mat-form-field mat-select {
+    font-style: italic;
+    font-weight: 600;
+    color: white;
+}
+
+::-moz-placeholder mat-from-field {
+    color: red;
+}
+
+::ng-deep.classRed::placeholder {
+    color: red;
+}
+
+::ng-deep.navbar.logoside.mat-form-field.mat-form-field-wrapper.mat-form-field-flex.mat-form-field-infix.mat-select.mat-select-trigger.mat-select-value.mat-select-placeholder:placeholder-shown {
+    color: white;
+    font-size: 24px;
+}
+
+::ng-deep .navbar .logoside .dropdown-item .mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix .mat-select .mat-select-trigger .mat-select-value .mat-select-arrow-wrapper .mat-select-arrow {
+    color: white;
+    font-size: 24px;
+}

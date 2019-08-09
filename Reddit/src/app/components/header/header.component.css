@@ -32,7 +32,6 @@
     text-transform: uppercase;
     font-weight: bold;
     text-decoration: black;
-    color: black;
 }
 
 .navbar .buttons {
@@ -83,4 +82,6 @@ h2 {
     color: #ffffff;
     font-family: 'Raleway', sans-serif;
     justify-content: flex-start;
+    text-shadow: 4px 3px 2px rgb(7, 6, 6);
+    padding-top: 2rem;
 }

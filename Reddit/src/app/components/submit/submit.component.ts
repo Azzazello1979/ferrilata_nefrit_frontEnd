@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PostServiceService } from "src/app/services/post-service.service";
 import { Router } from '@angular/router';
+import { url } from 'inspector';
 
 @Component({
   selector: "app-submit",
@@ -10,32 +11,53 @@ import { Router } from '@angular/router';
 })
 export class SubmitComponent implements OnInit {
   submitForm: FormGroup;
+  submitFormLink: FormGroup;
   channel: FormGroup;
+  myreg = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?/g;
   isChannelSelected: boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private postService: PostServiceService,
-    private router : Router,
+    private router: Router,
   ) {}
   hasError(controlName: string, errorName: string) {
     return this.submitForm.controls[controlName].hasError(errorName);
   }
+  hasLinkError(controlName: string, errorName: string) {
+    return this.submitFormLink.controls[controlName].hasError(errorName);
+  }
 
   submitData() {
-    let post = {
-      title: this.submitForm.get("title").value,
-      content: this.submitForm.get("content").value,
+    const post = {
+      title: this.submitForm.get('title').value,
+      content: this.submitForm.get('content').value,
       channel: this.channel
     };
     this.postService.createPosts(post);
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
+  }
+  submitLinkData() {
+    const postLink = {
+      title: this.submitFormLink.get('title').value,
+      url: this.submitFormLink.get('url').value,
+      channel: this.channel,
+      type: 'link',
+      content: this.submitFormLink.get('content').value,
+    }
+    this.postService.createPosts(postLink);
+    this.router.navigate(['/']);
   }
 
   ngOnInit() {
     this.submitForm = this.fb.group({
-      title: ["", [Validators.required]],
-      content: ["", [Validators.required, Validators.maxLength(255)]]
+      title: ['', [Validators.required]],
+      content: ['', [Validators.required, Validators.maxLength(255)]],
+    });
+    this.submitFormLink = this.fb.group({
+      title: ['', [Validators.required]],
+      content: ['', [Validators.required, Validators.maxLength(255)]],
+      url: ['', [Validators.required, Validators.pattern(this.myreg)]]
     });
   }
 
@@ -43,4 +65,5 @@ export class SubmitComponent implements OnInit {
     this.channel = $event;
     this.isChannelSelected = false;
   }
+
 }

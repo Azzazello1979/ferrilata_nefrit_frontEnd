@@ -17,18 +17,24 @@
                         <h3>{{ post.timestamp | elapsedTime }}</h3>
                     </li>
                 </div>
-                <div>
+                <div class="bottomrow">
                     <li>
-                        <h3>{{ post.title }}</h3>
+                        <h3 class="title">{{ post.title }}</h3>
                     </li>
                     <li>
                         <h3>{{ post.content }}</h3>
                     </li>
-                    <li class="delicon" *ngIf="isLoggedIn && jwtDecode() === post.userId.username" (click)="openDialog(post._id)"> <i class="material-icons">
-                    delete
-                  </i></li>
+                    <li *ngIf="post.url">
+                        <a target="_blank" [href]="post.url">{{ post.url }}</a>
+                    </li>
+
                 </div>
             </ul>
+            <span class="bottom-right">
+                <li class="delicon" *ngIf="isLoggedIn && jwtDecode() === post.userId.username" (click)="openDialog(post._id)"> <i class="material-icons">
+                  delete
+                </i></li>
+              </span>
         </div>
     </div>
     <p *ngIf="!posts.length">There aren't any posts yet</p>

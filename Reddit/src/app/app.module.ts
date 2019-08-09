@@ -24,7 +24,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatRippleModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatTabsModule
 } from "@angular/material";
 import { RegisterComponent } from "./components/register/register.component";
 import { ConfirmationDialogComponent } from "./components/confirmation-dialog/confirmation-dialog.component";
@@ -53,6 +54,7 @@ import { SubmitComponent } from './components/submit/submit.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
