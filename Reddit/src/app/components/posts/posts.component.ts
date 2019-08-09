@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Posts } from "../../posts.model";
 import { PostServiceService } from "../../services/post-service.service";
-import { Observable } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 import { MatDialog } from "@angular/material";
 import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
-import { Button } from "protractor";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { combineLatest } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-posts",
@@ -33,63 +33,33 @@ export class PostsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.postservice.getPosts().subscribe((postData: Posts[]) => {
+ /*    this.postservice.getPosts().subscribe((postData: Posts[]) => {
       this.posts = postData;
-    });
+    }); */
     this.isLoggedIn = this.authservice.isLoggedIn();
+    combineLatest(this.route.params, this.route.queryParams)
+      .pipe(map(results => ({ params: results[0].channel, query: results[1] })))
+      .subscribe(results => {
+        if (results.params !== undefined || results.query.filter !== undefined) {
 
-    this.route.params.subscribe((selectedChannel: Params) => {
-      if (Object.keys(selectedChannel).length === 0) {
-        this.postservice.getPosts().subscribe((postData: Posts[]) => {
-          this.posts = postData;
-        });
-      } else {
-        this.postservice
-          .filterPosts(selectedChannel)
-          .subscribe((postData: Posts[]) => {
+          this.postservice
+            .filterPosts(results.params, results.query)
+            .subscribe((postData: Posts[]) => {
+              console.log(postData);
+              
+              if (results.query.filter == "New") {
+                this.newestPostsOnTop(postData);
+              } else {
+                this.posts = postData;
+                console.log(results.params, results.query)
+              }
+            });
+        } else {
+          this.postservice.getPosts().subscribe((postData: Posts[]) => {
             this.posts = postData;
           });
-      }
-    });
-
-    this.route.queryParams.subscribe((query: Params) => {
-      if (query.filter) {
-        this.postservice.newPosts(query).subscribe((postData: Posts[]) => {
-          this.posts = postData;
-          console.log(
-            postData.map(post => post.timestamp).sort((a, b) => a - b)
-          );
-          console.log(
-            postData.map(post => post.timestamp).sort((a, b) => b - a)
-          );
-          console.log(
-            this.posts.map(post => post.timestamp).sort((a, b) => a - b)
-          );
-          console.log(
-            this.posts.map(post => post.timestamp).sort((a, b) => b - a)
-          );
-          this.posts
-            .map(post => post.timestamp)
-            .sort((a, b) => {
-              return b - a;
-            });
-          this.posts = this.posts.filter(post => post.timestamp).sort();
-
-          console.log(this.posts);
-        });
-      } else {
-        this.postservice.filterPosts(query).subscribe((postData: Posts[]) => {
-          console.log("s");
-
-          this.posts = postData;
-          this.posts
-            .map(post => post.timestamp)
-            .sort((a, b) => {
-              return b - a;
-            });
-        });
-      }
-    });
+        }
+      });
   }
 
   openDialog(postId): void {
@@ -113,11 +83,12 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  newestPosts() {
-    this.postservice.getPosts().subscribe(result => {
-      this.posts.sort(post => post.timestamp);
-      this.posts = result as Posts[];
-    });
+  newestPostsOnTop(postData: Posts[]) {
+    let reversed: Posts[] = [];
+    for (let i = postData.length-1; i >= 0; i--) {
+      reversed.push(postData[i]);
+    }
+    this.posts = reversed;
   }
 
   jwtDecode() {

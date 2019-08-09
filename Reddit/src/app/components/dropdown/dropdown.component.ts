@@ -33,7 +33,6 @@ export class DropdownComponent implements OnInit {
       entity: [null, Validators.required]
     });
     this.entity.get("entity").setValue(this.defaultValue);
-
     const receivedChannels = this.channelsvc.getAllChannels();
     receivedChannels.subscribe((channelsvcData: any) => {
       this.channels = channelsvcData;
@@ -45,9 +44,12 @@ export class DropdownComponent implements OnInit {
   }
 
   outputEntity($event: any) {
-    console.log($event.value);
     if ($event !== undefined) {
      this.selectionChange.next($event.value);
     } 
+  }
+
+  reset(){
+    this.entity.reset();
   }
 }

@@ -59,6 +59,10 @@ export class HeaderComponent implements OnInit {
   }
 
   reload() {
+    this.channel = undefined;
+    this.filter = undefined;
+    this.dropDownChannel.reset();
+    this.dropDownNewPosts.reset();
     this.router.navigate([`/`]);
   }
 

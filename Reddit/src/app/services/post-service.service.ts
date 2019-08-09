@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Posts } from '../posts.model';
-import { config } from '../config';
+import { Injectable } from "@angular/core";
+import { Observable, BehaviorSubject } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { HttpHeaders } from "@angular/common/http";
+import { environment } from "../../environments/environment";
+import { Posts } from "../posts.model";
+import { config } from "../config";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class PostServiceService {
   constructor(private http: HttpClient) {}
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     })
   };
 
@@ -22,38 +22,30 @@ export class PostServiceService {
       environment.postsUrl,
       this.httpOptions
     );
-    const postsObservables = new Observable(observer => {});
+    new Observable(observer => {});
     return request;
   }
 
-  filterPosts(selectedChannel): any {
-    const request = this.http.get(
-      environment.postsUrl + `${selectedChannel.channel}`,
-      this.httpOptions
-    );
+  filterPosts(params?, query?): any {
+    let checkParams;
+    if (params) {
+      checkParams = environment.postsUrl + params + "?filter=" + query.filter;
+    } else {
+      checkParams = environment.postsUrl + "?filter=" + query.filter;
+    }
+    const request = this.http.get(checkParams, this.httpOptions);
     return request;
   }
 
   deletePost(id: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       })
     };
     return this.http.delete(config.postsUrl + id, httpOptions);
   }
   createPosts(post): any {
     this.http.post(environment.postsUrl, post, this.httpOptions).subscribe();
-  }
-
-  newPosts(newestPosts): any {
-    const request = this.http.get(
-      environment.postsUrl + `?filter=${newestPosts.filter}`,
-      this.httpOptions
-    )
-    new Observable(observer => {
-      observer.next(request);
-    });
-    return request;
   }
 }
